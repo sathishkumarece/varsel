@@ -1,0 +1,20 @@
+{
+  "name": "varsel",
+  "version": "1.0.0",
+  "description": "No maintain credit and debit",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "varsel"
+  ],
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^5.2.1",
+    "method-override":"^2.3.10"
+  },
+  "author": "Sathishkumar NATARAJ",
+  "license": "MIT"
+}
