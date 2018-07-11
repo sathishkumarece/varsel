@@ -10,6 +10,10 @@ var ActivitiesSchema = new Schema({
     type: {type:String, enum: ["Credit", "Debit"]},
     information: String,
     phone: String,
-    date: new Date(),
+    date: Date,
     delete_flag: boolean
 },{collection: 'activities'});
+
+var ActivitiesModel = mongoose.model('Activities', ActivitiesSchema);
+
+module.exports = ActivitiesModel;
