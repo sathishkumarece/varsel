@@ -13,7 +13,7 @@ router.get('/activities', (req, res, next) =>{
   
   /* GET SINGLE PERSON BY person */
   router.get('/activities/:person', (req, res, next) => {
-    Activity.findOne({'person_name':req.params.person, 'delete_flag':false}, function (err, activities) {
+    Activity.find({'person_name':req.params.person, 'delete_flag':false}, function (err, activities) {
       if (err) return next(err);
       res.json(activities);
     });
@@ -28,8 +28,8 @@ router.get('/activities', (req, res, next) =>{
   });
 
   /* UPDATE Activity */
-  router.put('/activities/:id', function(req, res, next) {
-    Activity.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, {post}) {
+  router.put('/activities/:name/:id', function(req, res, next) {
+    Activity.findOneAndUpdate({'person_name':req.params.name, '_id':req.params.id}, req.body, function (err, {post}) {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
     });
@@ -37,7 +37,7 @@ router.get('/activities', (req, res, next) =>{
 
   /* Making delete flag enable hence it track of the records will be available */
   router.delete('/activities/:id', function(req, res, next) {
-    Activity.findOneAndUpdate({"person_name":req.params.id, 'delete_flag':false}, {'delete_flag':true}, function (err, post) {
+    Activity.findOneAndUpdate({"_id":req.params.id, 'delete_flag':false}, {'delete_flag':true}, function (err, post) {
       if (err) return next(err);
       res.json({"status": "Successfully deleted"});
     });
