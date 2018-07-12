@@ -13,7 +13,7 @@ router.get('/person', (req, res, next) =>{
     });
   });
   
-  /* GET SINGLE PERSON BY ID */
+  /* GET SINGLE PERSON BY person */
   router.get('/person/:person', (req, res, next) => {
     Person.findOne({'name_en':req.params.person}, function (err, person) {
       if (err) return next(err);
@@ -33,7 +33,7 @@ router.get('/person', (req, res, next) =>{
   router.put('/person/:id', function(req, res, next) {
     Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, {post}) {
       if (err) return next(err);
-      res.json({"success":"Successfully updated"});
+      res.json({"status":"Successfully updated"});
     });
   });
   
@@ -41,7 +41,7 @@ router.get('/person', (req, res, next) =>{
   router.delete('/person/:id', function(req, res, next) {
     Person.findOneAndRemove({"name_en":req.params.id}, req.body, function (err, post) {
       if (err) return next(err);
-      res.json({"Success": "Successfully deleted"});
+      res.json({"status": "Successfully deleted"});
     });
   });
   

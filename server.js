@@ -6,7 +6,8 @@ const app = express();
 // import personRouter from './routes/person-route';
 const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 const methodOverride = require('method-override'); 
-const personRouter = require('./routes/person-route');
+const personRouter = require('./routes/person-route'),
+activityRouter = require('./routes/activity-route');
 
 
 mongoose.Promise = global.Promise;
@@ -22,7 +23,7 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use('/', personRouter);
-
+app.use('/', activityRouter);
 
 app.get('/', (req, res) =>{
     res.send('Success message + good news');

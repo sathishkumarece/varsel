@@ -1,17 +1,15 @@
 //Model for activities
-const mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose'), 
+Schema = mongoose.Schema;
 
 var ActivitiesSchema = new Schema({
-    name_en: {
-        type: String,
-        required: [true, 'Why no name?']
-    },
+    person_name: {type: String, index: true},
     amount: String,
     type: {type:String, enum: ["Credit", "Debit"]},
     information: String,
     phone: String,
-    date: Date,
-    delete_flag: boolean
+    date: {type: Date, default: Date.now},
+    delete_flag: Boolean
 },{collection: 'activities'});
 
 var ActivitiesModel = mongoose.model('Activities', ActivitiesSchema);
