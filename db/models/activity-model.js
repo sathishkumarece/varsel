@@ -5,7 +5,7 @@ Schema = mongoose.Schema;
 
 var ActivitiesSchema = new Schema({
     person_name: {type: String, index: true},
-    amount: String,
+    amount: Number,
     type: {type:String, enum: ["Credit", "Debit"]},
     information: String,
     phone: String,

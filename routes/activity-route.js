@@ -5,12 +5,11 @@ const Activity = require('../db/models/activity-model');
 /* GET ALL activities */
 router.get('/activities', (req, res, next) =>{
     Activity.find( (err, activities) => {
-        console.log(activities);
       if (err) return next(err);
       res.json(activities);
     });
   });
-  
+
   /* GET SINGLE PERSON BY person */
   router.get('/activities/:person', (req, res, next) => {
     Activity.find({'person_name':req.params.person, 'delete_flag':false}, function (err, activities) {
@@ -19,6 +18,27 @@ router.get('/activities', (req, res, next) =>{
     });
   });
   
+  /* GET ALL activities */
+router.get('/activities/:person/calc', (req, res, next) =>{
+  Activity.find( (err, activities) => {
+    if (err) return next(err);
+    console.log(activities.length);
+    let finalAmount = 0;
+    activities.forEach((activity)=>{
+      console.log(activity);
+      if(activity.type == 'Credit'){
+        console.log('Add it');
+        finalAmount += activity.amount;
+      }else if(activity.type == 'Debit'){
+        console.log("Sub it");
+        finalAmount -=activity.amount;
+      }
+    });
+    console.log(finalAmount)
+    res.json({'finalAmount': finalAmount});
+  });
+});
+
   /* SAVE Activities */
   router.post('/activities', function(req, res, next) {
     Activity.create(req.body, function (err, post) {
@@ -42,4 +62,5 @@ router.get('/activities', (req, res, next) =>{
       res.json({"status": "Successfully deleted"});
     });
   });
+
   module.exports = router;
