@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Activity = require('../db/models/activity-model');
+const History = require('../db/models/history-model');
 
 /* GET ALL activities */
 router.get('/activities', (req, res, next) =>{
@@ -49,9 +50,22 @@ router.get('/activities/:person/calc', (req, res, next) =>{
 
   /* UPDATE Activity */
   router.put('/activities/:name/:id', function(req, res, next) {
-    Activity.findOneAndUpdate({'person_name':req.params.name, '_id':req.params.id}, req.body, function (err, {post}) {
+    Activity.findOneAndUpdate({'person_name':req.params.name, '_id':req.params.id}, req.body, function (err, post) {
       if (err) return next(err);
-      res.json({"status":"Successfully updated"});
+      // res.json({"status":"Successfully updated"});
+      console.log(post);
+      let data = [];
+      let keys = Object.keys(req.body);
+      console.log(keys);
+      keys.forEach( value =>{
+        data.push(historyObj(value, post[value], req.body[value]));
+      });
+      console.log(data);
+      // res.redirect(req.baseUrl+'/history/1003');
+      History.update({'activityId':req.params.id}, {$push: {'history':data}}, (err, {post}) => {
+        if (err) return next(err);
+        res.json({"status":"Successfully updated"});
+      });
     });
   });
 
@@ -62,5 +76,11 @@ router.get('/activities/:person/calc', (req, res, next) =>{
       res.json({"status": "Successfully deleted"});
     });
   });
+
+  var historyObj = (key, oldValue, newValue)=>{
+    let changeVlaue = {"old":oldValue, "new":newValue};
+    let change = {"key":key, "value":changeVlaue};
+    return change;
+  }
 
   module.exports = router;

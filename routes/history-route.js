@@ -45,7 +45,7 @@ router.get('/history', (req, res, next) =>{
   
    /* Update history for particular activity id */
    router.put('/history/:id', (req, res, next) => {
-    History.update({'activityId':req.params.id}, {$push: {'history':req.body}}, (err, {post}) => {
+    History.update({'activityId':req.params.id}, {$push: {'history':req.body}}, (err, post) => {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
     });

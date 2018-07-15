@@ -10,6 +10,7 @@ var ActivitiesSchema = new Schema({
     information: String,
     phone: String,
     date: {type: Date, default: Date.now},
+    update_date: {type: Date, default: Date.now},
     delete_flag: Boolean
 },{collection: 'activities'});
 

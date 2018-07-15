@@ -31,7 +31,7 @@ router.get('/person', (req, res, next) =>{
   
   /* UPDATE PERSON */
   router.put('/person/:id', function(req, res, next) {
-    Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, {post}) {
+    Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, post) {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
     });
