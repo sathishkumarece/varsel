@@ -11,10 +11,10 @@ var HistorySchema = new Schema({
             value: {
                 old: String,
                 new: String
-            }
+            },
+            date: {type: Date, default: Date.now}
         }
     ],
-    date: {type: Date, default: Date.now}
 },{collection: 'histories'});
 
 var HistoryModel = mongoose.model('History', HistorySchema);

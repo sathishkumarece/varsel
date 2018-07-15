@@ -27,7 +27,7 @@ router.get('/history', (req, res, next) =>{
               key = hist.key;
               oldValue = hist.value.old;
               newValue = hist.value.new;
-              let date = dateFormat(element.date);
+              let date = dateFormat(hist.date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
               msg.push(`"${key}" has been modified from "${oldValue}" to "${newValue}" on "${date}"`);
           });
       });
@@ -35,22 +35,22 @@ router.get('/history', (req, res, next) =>{
     });
   });
   
-  /* SAVE PERSON */
-  router.post('/history', function(req, res, next) {
-    History.create(req.body, function (err, post) {
+  /* Save History */
+  router.post('/history', (req, res, next) => {
+    History.create(req.body, (err, post) => {
       if (err) return next(err);
       res.json(post);
     });
   });
   
-  /* UPDATE PERSON */
-  /*router.put('/person/:id', function(req, res, next) {
-    Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, {post}) {
+   /* Update history for particular activity id */
+   router.put('/history/:id', (req, res, next) => {
+    History.update({'activityId':req.params.id}, {$push: {'history':req.body}}, (err, {post}) => {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
     });
-  });*/
-  
+  });
+
   /* DELETE PERSON */
   /*router.delete('/person/:id', function(req, res, next) {
     Person.findOneAndRemove({"name_en":req.params.id}, req.body, function (err, post) {
