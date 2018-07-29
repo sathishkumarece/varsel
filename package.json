@@ -15,7 +15,8 @@
     "mongoose": "^5.2.1",
     "mongoose-auto-increment": "^5.0.1",
     "method-override":"^2.3.10",
-    "dateformat": "3.0.3"
+    "dateformat": "3.0.3",
+    "translate":"1.0.2"
   },
   "author": "Sathishkumar NATARAJ",
   "license": "MIT"

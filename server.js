@@ -27,6 +27,9 @@ app.use('/', personRouter);
 app.use('/', activityRouter);
 app.use('/', historyRouter);
 
+// use static pages with express
+app.use(express.static('public'));
+
 app.get('/', (req, res) =>{
     res.send('Success message + good news');
 })

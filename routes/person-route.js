@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 // import Person from '../db/models/person-model'
 const Person = require('../db/models/person-model');
+const translate = require('translate');
 
 /* GET ALL PERSONS */
 router.get('/person', (req, res, next) =>{
@@ -10,7 +11,7 @@ router.get('/person', (req, res, next) =>{
         console.log(persons);
       if (err) return next(err);
       res.json(persons);
-    });
+    }).select("-_id");
   });
   
   /* GET SINGLE PERSON BY person */
@@ -23,7 +24,8 @@ router.get('/person', (req, res, next) =>{
   
   /* SAVE PERSON */
   router.post('/person', function(req, res, next) {
-    Person.create(req.body, function (err, post) {
+    var body = Object.assign(req.body, {'name_tn':'ssdv'});
+    Person.create(body, function (err, post) {
       if (err) return next(err);
       res.json(post);
     });
