@@ -1,28 +1,28 @@
 var editor; // use a global for the submit and return data rendering in the examples
 
 $(document).ready(function(){
-    $.ajax({
-        type: 'GET',
-        url:"/person"
-    }).done(function(data){
-        $('#example').DataTable({
-            // autoWidth: true,
-            destroy: true,
-            select: true,
-            data: data,
-            columns: [
-                {'data':'name_en'},
-                {'data':'phone'},
-                {'data':'address'},
-                {'data':'email'},
-                {'data':'name_tn'}
-            ],
-            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-                $(nRow).addClass("body-item mbr-fonts-style display-7");
-            },
-            responsive: true
-        });
-    });
+    // $.ajax({
+    //     type: 'GET',
+    //     url:"/person"
+    // }).done(function(data){
+    //     $('#example').DataTable({
+    //         // autoWidth: true,
+    //         destroy: true,
+    //         select: true,
+    //         data: data,
+    //         columns: [
+    //             {'data':'name_en'},
+    //             {'data':'phone'},
+    //             {'data':'address'},
+    //             {'data':'email'},
+    //             {'data':'name_tn'}
+    //         ],
+    //         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+    //             $(nRow).addClass("body-item mbr-fonts-style display-7");
+    //         },
+    //         responsive: true
+    //     });
+    // });
 
     $("#sub-person").click(function(){
         // alert($("form").serializeArray());
