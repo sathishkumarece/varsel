@@ -78,8 +78,8 @@ router.get('/activities/:person/calc', (req, res, next) =>{
   });
 
   var historyObj = (key, oldValue, newValue)=>{
-    let changeVlaue = {"old":oldValue, "new":newValue};
-    let change = {"key":key, "value":changeVlaue};
+    let changeValue = {"old":oldValue, "new":newValue};
+    let change = {"key":key, "value":changeValue};
     return change;
   }
 

@@ -7,7 +7,7 @@ const translate = require('translate');
 
 /* GET ALL PERSONS */
 router.get('/person', (req, res, next) =>{
-    Person.find( (err, persons) => {
+    Person.find({}, 'name_en address phone email name_tn', (err, persons) => {
         console.log(persons);
       if (err) return next(err);
       res.json(persons);
@@ -40,8 +40,10 @@ router.get('/person', (req, res, next) =>{
   });
   
   /* DELETE PERSON */
-  router.delete('/person/:id', function(req, res, next) {
-    Person.findOneAndRemove({"name_en":req.params.id}, req.body, function (err, post) {
+  router.delete('/person', function(req, res, next) {
+    console.log(req);
+    console.log(JSON.stringify(req.query));
+    Person.findOneAndRemove(JSON.stringify(req.query), req.body, function (err, post) {
       if (err) return next(err);
       res.json({"status": "Successfully deleted"});
     });

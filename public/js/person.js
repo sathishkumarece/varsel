@@ -1,38 +1,92 @@
-var editor; // use a global for the submit and return data rendering in the examples
+var table_person;
 
 $(document).ready(function(){
-    // $.ajax({
-    //     type: 'GET',
-    //     url:"/person"
-    // }).done(function(data){
-    //     $('#example').DataTable({
-    //         // autoWidth: true,
-    //         destroy: true,
-    //         select: true,
-    //         data: data,
-    //         columns: [
-    //             {'data':'name_en'},
-    //             {'data':'phone'},
-    //             {'data':'address'},
-    //             {'data':'email'},
-    //             {'data':'name_tn'}
+    $.ajax({
+        type: 'GET',
+        url:"/person"
+    }).done(function(data){
+        table_person = $('#example').DataTable({
+            // autoWidth: true,
+            destroy: true,
+            select: true,
+            data: data,
+            columns: [
+                {'data':'name_en'},
+                {'data':'phone'},
+                {'data':'address'},
+                {'data':'email'},
+                {'data':'name_tn'}
+            ],
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                $(nRow).addClass("body-item mbr-fonts-style display-7");
+            },
+            order: [],
+            responsive: true
+        });
+    });
+
+    // table_person = $("#example").DataTable({
+    //     "destroy": true,
+    //     "processing": true,
+    //     "serverSide": true,
+    //     "ajax": {
+    //         // "cache": true,
+    //         "type": 'GET',
+    //         "url":"/person",
+    //         // "data": "",
+    //        "dataSrc":""
+    //     },
+    //     // "select": true,
+    //     // "data": data,
+    //     "columns": [
+    //             {"data":"name_en"},
+    //             {"data":"phone"},
+    //             {"data":"address"},
+    //             {"data":"email"},
+    //             {"data":"name_tn"}
     //         ],
-    //         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+    //     "fnRowCallback": function (nRow, aData, iDisplayIndex) {
     //             $(nRow).addClass("body-item mbr-fonts-style display-7");
     //         },
-    //         responsive: true
-    //     });
+    //     "responsive": true
     // });
 
-    $("#sub-person").click(function(){
+    // var table_person = $("#example").DataTable();
+    $("#example tbody").on('click', 'tr', function(){
+        if($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{
+            table_person.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            console.log(this);
+        }
+    });
+
+    $("#delete-person").click(function(){
+        // alert('Inside');
+        console.log(table_person.row('.selected'));
+        table_person.row('.selected').remove().draw(true);
+        deletePersonData();
+    });
+
+    // $('#delete-person').click( function () {
+    //     console.log(table_person);
+    // } );
+
+    $("form").submit(function(){
         // alert($("form").serializeArray());
        let form_val= $("form").serialize();
         $.post("/person", form_val , function(data, status){
             alert("Success");
         })
-
     });
     
+    var deletePersonData = ()=>{
+        $.ajax({
+            url:"/person"+"?"+$.param({"name_en":"Sathishkumar NATARAJ"}),
+            type: "DELETE"
+        })
+    };
     /* editor = new $.fn.dataTable.Editor( {
         ajax: "/person",
         table: "#example",

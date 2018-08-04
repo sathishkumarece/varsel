@@ -5,9 +5,18 @@
     background-size: cover;
 }
 
+h2{
+    color: #ffffff;
+    font-weight: 600;
+    /* size: 10px; */
+}
+
+.selected{
+    background-color: #55a4f8;
+}
 .modal-dialog{
-    min-width: 50%;
-    min-height: 50%;
+    min-width: 60%;
+    min-height: 60%;
     padding: 50px;
     /* opacity: 0.50; */
     /* filter: alpha(opacity=60); */

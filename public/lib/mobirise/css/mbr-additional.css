@@ -1793,7 +1793,7 @@ body {
 
 .cid-qYEPhczfBe .table-hover tbody tr:hover{
   background-color: #b4eafc !important;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
 }
 .cid-qYEPhczfBe table th {
   border-top: none;
@@ -2291,4 +2291,8 @@ body {
 .cid-qTkzRZLJNu .nav-link:hover,
 .cid-qTkzRZLJNu .dropdown-item:hover {
   color: #c1c1c1 !important;
+}
+
+.cid-qYEPhczfBe .selected{
+  background-color: #0b566f;
 }

@@ -62,17 +62,18 @@
         <div class="modal-dialog">
             <div class="main-section">
                 <div class="modal-content text-center"><br/>
+                    <h2>Enter new person details</h2>
                     <form>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-prepand holder-span"><i class="mbri-user mbr-iconfont icon-span" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="name_en" id="name"  placeholder="Enter person name" required="required"/>
-                                </div>
                             </div>
+                        </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-prepand holder-span"><i class="mbri-letter mbr-iconfont icon-span" aria-hidden="true"></i></span>
-                                <input type="email" name="email" class="form-control" placeholder="Enter mail id">
+                                <input type="email" class="form-control" name="email" placeholder="Enter mail id, ex: dummy@varsel.com" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,12 +88,12 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">+91</div>
                                 </div>
-                                <input type="tel" name="phone" class="form-control" placeholder="Enter phone number">
+                                <input type="tel" name="phone" class="form-control" minlength="10" maxlength="10" placeholder="Enter phone number" required="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <!-- <p class="wrapper"><input type="submit" value="Submit" class="btn btn-sm"></p> -->
-                            <button type="button" class="btn btn-sm btn-register" id="sub-person"><i class="mbri-login mbr-iconfont"></i>Register</button>
+                            <button type="submit" class="btn btn-sm btn-register" id="sub-person"><i class="mbri-login mbr-iconfont"></i>Register</button>
                             <!-- <button type="button" class="btn btn-sm"><i class="mbri-login mbr-iconfont"></i>REGISTER &amp; NEW</button> -->
                         </div>
                     </form>
@@ -101,9 +102,12 @@
         </div>
     </div>
     <script src="../lib/web/assets/jquery/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
     <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="https://v4-alpha.getbootstrap.com/assets/js/vendor/tether.min.js"></script> -->
+    <!-- <script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
     <script src="../lib/popper/popper.min.js"></script>
-    <!-- <script src="../lib/theme/js/script.js"></script> -->
+    <script src="../lib/theme/js/script.js"></script>
     <script src="../js/person.js"></script>
 </body>
 </html>
