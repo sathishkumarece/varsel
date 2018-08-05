@@ -1,30 +1,56 @@
 var table_person;
 
 $(document).ready(function(){
-    $.ajax({
-        type: 'GET',
-        url:"/person"
-    }).done(function(data){
-        table_person = $('#example').DataTable({
-            // autoWidth: true,
-            destroy: true,
-            select: true,
-            data: data,
-            columns: [
-                {'data':'name_en'},
-                {'data':'phone'},
-                {'data':'address'},
-                {'data':'email'},
-                {'data':'name_tn'}
-            ],
-            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-                $(nRow).addClass("body-item mbr-fonts-style display-7");
-            },
-            order: [],
-            responsive: true
-        });
-    });
+    // $.ajax({
+    //     type: 'GET',
+    //     url:"/person"
+    // }).done(function(data){
+    //     table_person = $('#example').DataTable({
+    //         // autoWidth: true,
+    //         destroy: true,
+    //         select: true,
+    //         data: data,
+    //         columns: [
+    //             {'data':'name_en'},
+    //             {'data':'phone'},
+    //             {'data':'address'},
+    //             {'data':'email'},
+    //             {'data':'name_tn'}
+    //         ],
+    //         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+    //             $(nRow).addClass("body-item mbr-fonts-style display-7");
+    //         },
+    //         order: [],
+    //         responsive: true
+    //     });
+    // });
 
+
+    table_person = $('#example').DataTable({
+        // autoWidth: true,
+        ajax: {
+            //         // "cache": true,
+                "type": 'GET',
+                "url":"/person",
+            //         // "data": "",
+               "dataSrc":""
+                },
+        destroy: true,
+        select: true,
+        // data: data,
+        columns: [
+            {'data':'name_en', 'width':'1%'},
+            {'data':'phone'},
+            {'data':'address'},
+            {'data':'email'},
+            {'data':'name_tn'}
+        ],
+        "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+            $(nRow).addClass("body-item mbr-fonts-style display-7");
+        },
+        order: [],
+        responsive: true
+    });
     // table_person = $("#example").DataTable({
     //     "destroy": true,
     //     "processing": true,
@@ -78,6 +104,9 @@ $(document).ready(function(){
        let form_val= $("form").serialize();
         $.post("/person", form_val , function(data, status){
             alert("Success");
+            console.log(data);
+            // $('#successMessage').show();
+            // $('#successMessage').delay(3000).fadeOut("slow");
         })
     });
     
