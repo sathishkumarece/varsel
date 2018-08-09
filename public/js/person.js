@@ -103,19 +103,14 @@ $(document).ready(function(){
         // alert($("form").serializeArray());
        let form_val= $("form").serialize();
         $.post("/person", form_val , function(data, status){
-            alert("Success");
+            // alert("Success");
             console.log(data);
+            location.href = "/html/managePerson.html";
             // $('#successMessage').show();
             // $('#successMessage').delay(3000).fadeOut("slow");
         })
     });
     
-    var deletePersonData = ()=>{
-        $.ajax({
-            url:"/person"+"?"+$.param({"name_en":"Sathishkumar NATARAJ"}),
-            type: "DELETE"
-        })
-    };
     /* editor = new $.fn.dataTable.Editor( {
         ajax: "/person",
         table: "#example",

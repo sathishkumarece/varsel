@@ -43,7 +43,7 @@ router.get('/person', (req, res, next) =>{
   router.delete('/person', function(req, res, next) {
     console.log(req);
     console.log(JSON.stringify(req.query));
-    Person.findOneAndRemove(JSON.stringify(req.query), req.body, function (err, post) {
+    Person.findOneAndRemove(req.query, {"select":req.body}, function (err, post) {
       if (err) return next(err);
       res.json({"status": "Successfully deleted"});
     });

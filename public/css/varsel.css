@@ -110,9 +110,36 @@ div span{
 }
 
 .user-edit {
-    background:none;
+    /* background:none;
     border:none;
     margin:0;
-    padding:0;
+    padding:0; */
     cursor: pointer;
+}
+.user-delete {
+    /* background:none;
+    border:none;
+    margin:0;
+    padding:0; */
+    cursor: pointer;
+}
+
+.card-hover .reveal {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    padding: 0;
+}
+
+.card-hover:hover .reveal {
+    height: auto;
+    visibility: visible;
+    opacity: 10;
+    transition: opacity 1s ease;
+}
+
+/* CSS for custom button */
+.custom-button{
+    height: 50px;
+    border-radius: 25px;
 }

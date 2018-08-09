@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../images/image4146.png" type="image/x-icon">
     <title>Manage Person</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css">
@@ -29,7 +30,7 @@
                 <div class="navbar-brand">
                     <span class="navbar-logo">
                         <a href="https://Varsel.com">
-                            <img src="../images/logo2.png" alt="Varsel" style="height: 3.9rem;">
+                            <img src="../images/image4146.png" alt="Varsel" style="height: 3.9rem;">
                         </a>
                     </span>
                     <span class="navbar-caption-wrap">
@@ -62,12 +63,14 @@
     <div class="bg-img mbr-fullscreen mbr-parallax-background">
         <div class="container">
             <div class="row py-2">
-                    <a class="btn btn-sm btn-primary display-4" href="./createPerson.html">
-                        <span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>
-                        Create Users</a>
-                <div class="col-sm-4">
-                    <i class="fa fa-search fa-2x" id="search"></i>
-                    <input type="search" placeholder="Start search.." name="search" class="form-control searchbox-input" required="">
+                <a class="btn btn-sm btn-primary display-4 custom-button" href="./createPerson.html">
+                    <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
+                    Create Users</a>
+                <div class="col-sm-4 ml-auto input-group mb-3">
+                    <input type="search" placeholder="Search specific user.." name="search" class="form-control searchbox-input" required="">
+                    <div class="input-group-append float-right">
+                    <i class="fa fa-search fa-2x input-group-text" style="background-color: #f5f5f5; color: #000000"></i>
+                    </div>
                 </div>
             </div>
 
