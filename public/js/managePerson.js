@@ -16,7 +16,7 @@ $(document).ready(function () {
                 '<h5 class="card-title text-left">' + element.name_en + '</h5>' +
                 '<div class="row">' +
                 '<div class="col-12 col-sm-6 col-md-3 px-0">' +
-                '<img src="../images/Professional_photo.jpg" alt="" class="img-fluid rounded-circle d-block mx-auto">' +
+                '<img src="../images/Professional_photo.jpg" alt="" class="img-fluid rounded-circle d-block mx-auto" style="height:80px; width:80px;">' +
                 '</div>' +
                 '<div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">' +
                 '<span class="fa fa-envelope fa-fw" data-toggle="tooltip" data-original-title="" title="" style="color:#4a4b4b;"></span>' +
@@ -37,6 +37,23 @@ $(document).ready(function () {
         });
     });
 
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+            $('#back-to-top').fadeIn();
+        } else {
+            $('#back-to-top').fadeOut();
+        }
+    });
+    // scroll body to 0px on click
+    $('#back-to-top').click(function () {
+        $('#back-to-top').tooltip('hide');
+        $('body,html').animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+    
+    $('#back-to-top').tooltip('show');
 });
 $('.searchbox-input').on('keyup', function () {
     var filter = $(this).val(); // get the value of the input, which we filter on

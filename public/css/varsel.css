@@ -143,3 +143,21 @@ div span{
     height: 50px;
     border-radius: 25px;
 }
+
+/* Shadow for card title */
+/* .card-title{
+    text-shadow: 
+      1px -1px 0 #767676;
+} */
+
+th.head-item{
+    color: #ec4545 !important;
+}
+
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    display:none;
+}
