@@ -99,16 +99,28 @@ $(document).ready(function(){
     //     console.log(table_person);
     // } );
 
-    $("form").submit(function(){
+    $("form").submit(function(e){
         // alert($("form").serializeArray());
+        e.preventDefault();
        let form_val= $("form").serialize();
-        $.post("/person", form_val , function(data, status){
-            // alert("Success");
-            console.log(data);
-            location.href = "/html/managePerson.html";
-            // $('#successMessage').show();
-            // $('#successMessage').delay(3000).fadeOut("slow");
-        })
+       $.ajax({
+           url: '/person',
+           type: 'POST',
+           data: form_val,
+           async: false,
+           success: function(data){
+               setTimeout(function(){
+                   console.log(data);
+                }, 2000);
+            },
+            error: function(){
+                console.log('error occured');
+            },
+            complete: function(){
+                // location.href = "/html/managePerson.html";
+                showNotification('top','right');
+           }
+       });
     });
     
     /* editor = new $.fn.dataTable.Editor( {
@@ -167,3 +179,22 @@ $(document).ready(function(){
     table.buttons().container()
         .appendTo( $('.col-md-6:eq(0)', table.table().container() ) );*/
 });
+
+function showNotification(from, align) {
+    // type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
+
+    // color = Math.floor((Math.random() * 6) + 1);
+
+    $.notify({
+      icon: "fas fa-check",
+      message: "User successfully saved!"
+
+    }, {
+      type: 'success',
+      timer: 2000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
+  }

@@ -13,6 +13,14 @@ router.get('/person', (req, res, next) =>{
       res.json(persons);
     }).select("-_id");
   });
+
+  router.get('/person/getname', (req,res, next) =>{
+     Person.find({}, 'name_en', (err, persons) => {
+       console.log(persons);
+       if(err) return next(err);
+       res.json(persons);
+     }).select("-_id");
+  });
   
   /* GET SINGLE PERSON BY person */
   router.get('/person/:person', (req, res, next) => {
@@ -24,18 +32,17 @@ router.get('/person', (req, res, next) =>{
   
   /* SAVE PERSON */
   router.post('/person', function(req, res, next) {
+    console.log(req.body);
     var body = Object.assign(req.body, {'name_tn':'ssdv'});
     Person.create(body, function (err, post) {
       if (err) return next(err);
+      console.log(post);
       res.json(post);
     });
   });
   
   /* UPDATE PERSON */
   router.put('/person/:id', function(req, res, next) {
-    console.log('I am inside');
-    console.log(req.params.id);
-    console.log(req.body);
     Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, post) {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
