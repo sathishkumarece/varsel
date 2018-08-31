@@ -112,13 +112,14 @@ $(document).ready(function(){
                setTimeout(function(){
                    console.log(data);
                 }, 2000);
+                showNotification('top','right', 'User saved successful!', 'success');
             },
-            error: function(){
-                console.log('error occured');
+            error: function(e){
+                console.log(e);
+                showNotification('top','right', 'Person already exist', 'danger');
             },
             complete: function(){
                 // location.href = "/html/managePerson.html";
-                showNotification('top','right');
            }
        });
     });
@@ -180,17 +181,17 @@ $(document).ready(function(){
         .appendTo( $('.col-md-6:eq(0)', table.table().container() ) );*/
 });
 
-function showNotification(from, align) {
+function showNotification(from, align, message, type) {
     // type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
 
     // color = Math.floor((Math.random() * 6) + 1);
 
     $.notify({
       icon: "fas fa-check",
-      message: "User successfully saved!"
+      message: message
 
     }, {
-      type: 'success',
+      type: type,
       timer: 2000,
       placement: {
         from: from,

@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 var PersonSchema = new Schema({
     name_en: {
         type: String,
-        required: [true, 'Why no name?']
+        required: [true, 'Why no name?'],
+        unique: true
     },
     name_tn: String,
     address: String,

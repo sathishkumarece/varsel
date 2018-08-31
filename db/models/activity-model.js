@@ -7,6 +7,7 @@ var ActivitiesSchema = new Schema({
     person_name: {type: String, index: true},
     amount: Number,
     type: {type:String, enum: ["Credit", "Debit"]},
+    category:{type:String},
     information: String,
     phone: String,
     date: {type: Date, default: Date.now},

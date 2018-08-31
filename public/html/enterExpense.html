@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="../lib/web/assets/mobirise-icons/mobirise-icons.css">
     <link rel="stylesheet" href="../lib/tether/tether.min.css">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="../lib/bootstrap-select/css/bootstrap-select.min.css"> -->
-    <!-- <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../lib/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../lib/bootstrap-select/css/bootstrap-select.min.css">
+    <!-- CSS for bootstrap date picker -->
+    <link rel="stylesheet" href="../lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="../lib/socicon/css/styles.css">
     <!-- <link rel="stylesheet" href="../lib/dropdown/css/style.css"> -->
     <link rel="stylesheet" href="../lib/theme/css/style.css">
@@ -73,10 +73,69 @@
     <section class="engineExpense">
         <div class="container">
             <form action="">
-                <div class="form-group col-lg-4">
-                    <select id='getName' class="selectpicker show-tick form-control" data-live-search="true">
-                        <!-- <option selected>Bla</option> -->
-                    </select>
+                <div class="form-group row">
+                    <label for="getName" class="col-sm-2 col-form-label">Whom:</label>
+                    <div class="col-sm-6">
+                        <select id='getName' name="person_name" class="selectpicker show-tick form-control" data-live-search="true">
+                            <!-- <option selected>Bla</option> -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="amount" class="col-sm-2 col-form-label">Amount:</label>
+                    <div class="col-sm-6">
+                        <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter amount">
+                    </div>
+                </div>
+                <!-- Date picker form -->
+                <div class="form-group row">
+                    <label for="datepicker" class="col-sm-2 col-form-label">Date:</label>
+                    <div class="col-sm-6">
+                        <div class="input-group date">
+                            <!-- <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div> -->
+                            <input type="text" name="date" class="form-control pull-right" id="datepicker" placeholder="Choose date">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="reason" class="col-sm-2 col-form-label">Reason:</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" name="information" id="reason" placeholder="Enter reason..." rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="category" class="col-sm-2 col-form-label">Category:</label>
+                    <div class="col-sm-6">
+                        <select id='category' name="category" class="selectpicker show-tick form-control" data-live-search="true">
+                            <option selected>Salary</option>
+                            <option>Income</option>
+                            <option>Food</option>
+                            <option>Study</option>
+                            <option>Shopping</option>
+                            <option>Travel</option>
+                            <option>Household</option>
+                            <option>Doctor</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row ml-auto">
+                    <label for="expenseType" class="col-form-label float-right">Credit</label>
+                    <!-- <div class="col-sm-2"> -->
+                        <label class="custom-toggle">
+                            <input type="checkbox" class="form-control" id="expenseType" name="type" value="Debit">
+                            <span class="custom-toggle-slider rounded-circle"></span>
+                        </label>
+                        <input id='testNameHidden' type='hidden' value='Credit' name='type'>
+                    <!-- </div> -->
+                    <label for="expenseType" class="col-form-label float-left">Debit</label>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" value="false" name="delete_flag"> 
+                    <button type="submit" class="btn btn-sm btn-primary display-4 custom-button">
+                        <span class="mbri-save mbr-iconfont mbr-iconfont-btn"></span>Save</button>
                 </div>
             </form>
         </div>
@@ -87,8 +146,9 @@
     <!-- <script src="../lib/popper/popper.min.js"></script> -->
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="../lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- JavaScript for bootstrap date picker -->
+    <script src="../lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
     <script src="../js/enterExpense.js"></script>
 </body>
 

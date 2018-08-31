@@ -5,7 +5,7 @@ const History = require('../db/models/history-model');
 
 /* GET ALL activities */
 router.get('/activities', (req, res, next) =>{
-    Activity.find( (err, activities) => {
+    Activity.find({'delete_flag':false}, '_id person_name amount date information category type', (err, activities) => {
       if (err) return next(err);
       res.json(activities);
     });
