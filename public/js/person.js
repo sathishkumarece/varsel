@@ -1,30 +1,7 @@
 var table_person;
 
 $(document).ready(function(){
-    // $.ajax({
-    //     type: 'GET',
-    //     url:"/person"
-    // }).done(function(data){
-    //     table_person = $('#example').DataTable({
-    //         // autoWidth: true,
-    //         destroy: true,
-    //         select: true,
-    //         data: data,
-    //         columns: [
-    //             {'data':'name_en'},
-    //             {'data':'phone'},
-    //             {'data':'address'},
-    //             {'data':'email'},
-    //             {'data':'name_tn'}
-    //         ],
-    //         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-    //             $(nRow).addClass("body-item mbr-fonts-style display-7");
-    //         },
-    //         order: [],
-    //         responsive: true
-    //     });
-    // });
-
+    $('#error_message').hide();
 
     table_person = $('#example').DataTable({
         // autoWidth: true,
@@ -116,7 +93,12 @@ $(document).ready(function(){
             },
             error: function(e){
                 console.log(e);
-                showNotification('top','right', 'Person already exist', 'danger');
+                console.log(e.responseText);
+                if(e.responseText.includes("duplicate key error")){
+                    $('#error_message').show();
+                }else{
+                showNotification('top','right', 'Error occured while saving user', 'danger');
+                }
             },
             complete: function(){
                 // location.href = "/html/managePerson.html";

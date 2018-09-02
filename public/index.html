@@ -18,6 +18,7 @@
     <!-- <link rel="stylesheet" href="lib/datatables/data-tables.bootstrap4.min.css"> -->
     <link rel="stylesheet" href="lib/dropdown/css/style.css">
     <link rel="stylesheet" href="lib/theme/css/style.css">
+    <link rel="stylesheet" href="lib/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="http://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="lib/mobirise/css/mbr-additional.css" type="text/css">
@@ -82,7 +83,6 @@
     <section class="cid-qYEN8y2HHa mbr-fullscreen mbr-parallax-background" id="header2-4">
 
 
-
         <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(35, 35, 35);"></div>
 
         <div class="container align-center">
@@ -106,14 +106,18 @@
             </a>
         </div>
     </section>
-
     <section class="section-table cid-qYEPhczfBe" id="table1-5">
-
-
+        <div id="stripes" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
         <div class="container container-table">
             <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
-                Table
+                Expenses
             </h2>
             <!-- <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
             Click blue "Gear" icon in the top right corner to hide/show search and info, change the the table background and other parameters.  In browser click on the table head to sort the table, use search to filter the table.     
@@ -131,49 +135,160 @@
                     </div>
                 </div>
 
-                <button id="delete-person" class="btn btn-primary btn-md">Delete Row</button>
-                <div class="container scroll">
-                    <table id="activity_table" class="table isSearch table-responsive table-striped table-hover" cellspacing="0">
-                        <thead>
-                            <tr class="table-heads ">
-                                <th class="head-item mbr-fonts-style display-7">
-                                    NAME</th>
-                                    <th class="head-item mbr-fonts-style display-7">
-                                    S.NO</th>
-                                <th class="head-item mbr-fonts-style display-7">
-                                    AMOUNT</th>
-                                <th class="head-item mbr-fonts-style display-7">
-                                    DATE</th>
-                                <th class="head-item mbr-fonts-style display-7">
-                                    REASON</th>
-                                <th class="head-item mbr-fonts-style display-7">
-                                    CATEGORY</th>
-                                <th class="head-item mbr-fonts-style display-7">
-                                    TYPE</th>
-                            </tr>
-                        </thead>
+                <div class="row align-center">
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-md advance_search_button" data-toggle="collapse" data-target="#form_advance_search">Advance Search</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="edit_expense" class="btn btn-primary btn-md advance_search_button">Edit Expense</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="delete_expense" class="btn btn-primary btn-md advance_search_button" data-toggle="modal" data-target="#deleteModal">Delete Expense</button>
+                    </div>
+                </div>
+                <div id="form_advance_search" class="border collapse form_advance_search">
+                    <!-- <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label>Minimum amount: </label>
+                                <input type="text" id="min" name="min">
+                                <label>Maximum amount: </label>
+                                <input type="text" id="max" name="max">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="col-1">
+                                    <label>Name: </label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" id="filter_name" name="filter_name">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Category: </label>
+                                    <input type="text" id="filter_category" name="filter_category">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Type: </label>
+                                    <input type="text" id="filter_type" name="filter_type">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="button" class="btn btn-secondary" value="Advance search" id="search" name="search">
+                    </form> -->
+                    <form class="search_style">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="filter_name">Name</label>
+                                <input type="text" class="form-control" id="filter_name">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="filter_category">Category</label>
+                                <select id="filter_category" class="form-control">
+                                    <option selected></option>
+                                    <option>Salary</option>
+                                    <option>Income</option>
+                                    <option>Food</option>
+                                    <option>Study</option>
+                                    <option>Shopping</option>
+                                    <option>Travel</option>
+                                    <option>Household</option>
+                                    <option>Doctor</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="filter_type">Type</label>
+                                <select id="filter_type" class="form-control">
+                                    <option selected></option>
+                                    <option>Debit</option>
+                                    <option>Credit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="filter_reason">Reason</label>
+                                <input type="text" class="form-control" id="filter_reason">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="filter_amt_min">Minimum Amount</label>
+                                <input type="text" class="form-control" id="filter_amt_min">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="filter_amt_max">Maximum Amount</label>
+                                <input type="text" class="form-control" id="filter_amt_max">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary advance_search_button" id="search">Search</button>
+                        <button type="reset" class="btn btn-primary advance_search_button" id="search">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="container scroll">
+                <table id="activity_table" class="table isSearch table-responsive table-striped table-hover" cellspacing="0">
+                    <thead>
+                        <tr class="table-heads ">
+                            <th class="head-item mbr-fonts-style display-7">
+                                NAME</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                S.NO</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                AMOUNT</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                DATE</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                REASON</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                CATEGORY</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                TYPE</th>
+                        </tr>
+                    </thead>
 
-                        <!-- <tbody>
+                    <!-- <tbody>
               <td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">44</td><td class="body-item mbr-fonts-style display-7">2016-10-17</td><td class="body-item mbr-fonts-style display-7">$317.000</td></tr><tr>
               <td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">35</td><td class="body-item mbr-fonts-style display-7">2013-04-12</td><td class="body-item mbr-fonts-style display-7">$445.500</td></tr><tr>
               <td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">66</td><td class="body-item mbr-fonts-style display-7">2016-05-22</td><td class="body-item mbr-fonts-style display-7">$152.558</td></tr><tr>
               <td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">70</td><td class="body-item mbr-fonts-style display-7">2016-05-15</td><td class="body-item mbr-fonts-style display-7">$459.146</td></tr>
             </tbody> -->
-                    </table>
-                </div>
-                <div class="container table-info-container">
-                    <div class="row info">
-                        <div class="col-md-6">
-                            <div class="dataTables_info mbr-fonts-style display-7">
-                                <span class="infoBefore">Showing</span>
-                                <span class="inactive infoRows"></span>
-                                <span class="infoAfter">entries</span>
-                                <span class="infoFilteredBefore">(filtered from</span>
-                                <span class="inactive infoRows"></span>
-                                <span class="infoFilteredAfter"> total entries)</span>
-                            </div>
+                </table>
+            </div>
+            <div class="container table-info-container">
+                <div class="row info">
+                    <div class="col-md-6">
+                        <div class="dataTables_info mbr-fonts-style display-7">
+                            <span class="infoBefore">Showing</span>
+                            <span class="inactive infoRows"></span>
+                            <span class="infoAfter">entries</span>
+                            <span class="infoFilteredBefore">(filtered from</span>
+                            <span class="inactive infoRows"></span>
+                            <span class="infoFilteredAfter"> total entries)</span>
                         </div>
-                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal HTML -->
+        <div id="deleteModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="icon-box">
+                            <!-- <i class="material-icons">&#xE5CD;</i> -->
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <br>
+                        <h4 class="modal-title">Are you sure?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
