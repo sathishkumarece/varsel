@@ -573,6 +573,11 @@ th.head-item{
     right:0;
     background:#a1ffc8
 }
+
+#activity_table_length{
+    display: none; 
+}
+
 @media (min-width:670px){
     #stripes span{
         height:150px
@@ -619,11 +624,12 @@ th.head-item{
 .modal-confirm .modal-header {
     border-bottom: none;   
     position: relative;
+    display: inline-block;
 }
 .modal-confirm h4 {
     text-align: center;
     font-size: 26px;
-    margin: 30px 0 -10px;
+    /* margin: 30px 0 -10px; */
 }
 .modal-confirm .close {
     position: absolute;
@@ -671,6 +677,7 @@ th.head-item{
     border-radius: 3px;
     margin: 0 5px;
     outline: none !important;
+    padding: 0%;
 }
 .modal-confirm .btn-info {
     background: #c1c1c1;

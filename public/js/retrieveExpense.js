@@ -15,16 +15,17 @@ $(document).ready(function () {
         select: true,
         // data: data,
         columns: [
-            { 'data': 'person_name', 'width': "20%" },
+            { 'data': 'person_name', 'width': "25%" },
             { 'data': '_id', 'visible': false },
             { 'data': 'amount' },
             {
                 'data': 'date',
                 'render': function (d) {
                     return moment(d).format("YYYY-DD-MM");
-                }
+                },
+                'width':"15%"
             },
-            { 'data': 'information' },
+            { 'data': 'information', 'width':"30%" },
             { 'data': 'category' },
             { 'data': 'type' }
         ],
