@@ -243,6 +243,8 @@
                                 CATEGORY</th>
                             <th class="head-item mbr-fonts-style display-7">
                                 TYPE</th>
+                            <th class="head-item mbr-fonts-style display-7">
+                                HISTORY</th>
                         </tr>
                     </thead>
 
@@ -270,7 +272,7 @@
                 </div>
             </div>
         </div>
-        <!-- Modal HTML -->
+        <!-- Delete Modal HTML -->
         <div id="deleteModal" class="modal fade">
             <div class="modal-dialog modal-confirm">
                 <div class="modal-content">
@@ -293,6 +295,49 @@
                 </div>
             </div>
         </div>
+        <!-- End of Delete Modal -->
+        <!-- Edit Modal HTML -->
+        <div id="editModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header align-center">
+                        <div class="icon-box">
+                            <!-- <i class="material-icons">&#xE5CD;</i> -->
+                            <i class="fa fa-times animated rotateIn"></i>
+                        </div>
+                        <br>
+                        <h4 class="modal-title">Are you sure?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer align-center">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Edit Modal -->
+        <!-- Edit Modal HTML -->
+        <div id="showHistory" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header align-center">
+                        <h4 class="modal-title">History information</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="show_p">No history</p>
+                    </div>
+                    <div class="modal-footer align-center">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Edit Modal -->
     </section>
 
     <section class="cid-qYEMurZg6I" id="footer1-3">

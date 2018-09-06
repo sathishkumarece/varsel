@@ -27,7 +27,17 @@ $(document).ready(function () {
             },
             { 'data': 'information', 'width':"30%" },
             { 'data': 'category' },
-            { 'data': 'type' }
+            { 'data': 'type' },
+            {
+                'data':'has_history',
+                'render': function(d){
+                    if(d){
+                        return '<a id="history_edit" onclick=showHistory(this)><i class="fas fa-history"></i></a>';
+                    }else{
+                        return '<span/>'
+                    }
+                }
+            }
         ],
         "fnRowCallback": function (nRow, aData, iDisplayIndex) {
             $(nRow).addClass("body-item mbr-fonts-style display-7");
@@ -47,18 +57,39 @@ $('#search').click(() => {
     table_activity.draw();
 });
 
-$("#activity_table tbody").on('click', 'tr', function(){
-    if($(this).hasClass('selected')){
-        $('#edit_expense').hide();
-        $('#delete_expense').hide();
-        $(this).removeClass('selected');
-    }else{
-        $('#edit_expense').show();
-        $('#delete_expense').show();
-        table_activity.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-        console.log(this);
-    }
+function showHistory(element){
+    // let id = $(element).parent().parent().children()[1].innerText;
+    let id = table_activity.row($(element).parent()).data()["_id"];
+    console.log(id);
+    $.ajax({
+        url:"/history/"+id,
+        type:"GET"
+    }).done(function(data){
+        console.log(data);
+        $("#show_p").text(data);
+        $("#showHistory").modal('show');
+    }).fail(function(){
+
+    });
+};
+
+// $("#activity_table tbody").on('click', 'tr', function(){
+//     if($(this).hasClass('selected')){
+//         $('#edit_expense').hide();
+//         $('#delete_expense').hide();
+//         $(this).removeClass('selected');
+//     }else{
+//         $('#edit_expense').show();
+//         $('#delete_expense').show();
+//         table_activity.$('tr.selected').removeClass('selected');
+//         $(this).addClass('selected');
+//         console.log(this);
+//     }
+// });
+
+$("#activity_table tbody").on('dblclick', 'tr', function(){
+    console.log('test');
+    $("#editModal").modal('toggle');
 });
 
 $("#delete_confirm").click(function(){
