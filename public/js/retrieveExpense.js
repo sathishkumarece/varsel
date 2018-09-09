@@ -1,4 +1,4 @@
-var table_activity
+var table_activity, isMobile;
 $(document).ready(function () {
 
     $('#edit_expense').hide();
@@ -23,17 +23,17 @@ $(document).ready(function () {
                 'render': function (d) {
                     return moment(d).format("YYYY-DD-MM");
                 },
-                'width':"15%"
+                'width': "15%"
             },
-            { 'data': 'information', 'width':"30%" },
+            { 'data': 'information', 'width': "30%" },
             { 'data': 'category' },
             { 'data': 'type' },
             {
-                'data':'has_history',
-                'render': function(d){
-                    if(d){
+                'data': 'has_history',
+                'render': function (d) {
+                    if (d) {
                         return '<a id="history_edit" onclick=showHistory(this)><i class="fas fa-history"></i></a>';
-                    }else{
+                    } else {
                         return '<span/>'
                     }
                 }
@@ -46,6 +46,27 @@ $(document).ready(function () {
         responsive: true
     });
 
+    isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function () {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
+
     // Event listener to the two range filtering inputs to redraw on input
     // $('#min, #max').keyup( function() {
     //     table_activity.draw();
@@ -57,65 +78,112 @@ $('#search').click(() => {
     table_activity.draw();
 });
 
-function showHistory(element){
+function showHistory(element) {
     // let id = $(element).parent().parent().children()[1].innerText;
     let id = table_activity.row($(element).parent()).data()["_id"];
     console.log(id);
     $.ajax({
-        url:"/history/"+id,
-        type:"GET"
-    }).done(function(data){
+        url: "/history/" + id,
+        type: "GET"
+    }).done(function (data) {
         console.log(data);
-        $("#show_p").text(data);
+        $("#show_p").html(timeline(data));
         $("#showHistory").modal('show');
-    }).fail(function(){
+    }).fail(function () {
 
     });
 };
 
-// $("#activity_table tbody").on('click', 'tr', function(){
-//     if($(this).hasClass('selected')){
-//         $('#edit_expense').hide();
-//         $('#delete_expense').hide();
-//         $(this).removeClass('selected');
-//     }else{
-//         $('#edit_expense').show();
-//         $('#delete_expense').show();
-//         table_activity.$('tr.selected').removeClass('selected');
-//         $(this).addClass('selected');
-//         console.log(this);
-//     }
-// });
+function timeline(data) {
+    var timelineVal = '<div class="row">' +
+        '<div class="col-md-12">' +
+        '<div class="main-timeline">';
+    data.forEach((val) => {
+        let midRegion =
+            '<div class="timeline">' +
+            '<div class="timeline-content">' +
+            '<span class="year">' + val.key + '</span>' +
+            '<p class="description">' +
+            val.values +
+            '</p>' +
+            '</div>' +
+            '</div>';
+        timelineVal = timelineVal.concat(midRegion);
+    });
+    timelineVal = timelineVal.concat('</div></div></div>');
+    return timelineVal;
+};
 
-$("#activity_table tbody").on('dblclick', 'tr', function(){
+$("#activity_table tbody").on('click', 'tr', function () {
+    if ($(this).hasClass('selected')) {
+        if (!isMobile.any()) {
+            $('#edit_expense').hide();
+            $('#delete_expense').hide();
+        }
+        $(this).removeClass('selected');
+    } else {
+        if (!isMobile.any()) {
+            $('#edit_expense').show();
+            $('#delete_expense').show();
+        }
+        table_activity.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+        console.log(this);
+    }
+});
+
+$("#activity_table tbody").on('dblclick', 'tr', function () {
     console.log('test');
     $("#editModal").modal('toggle');
 });
 
-$("#delete_confirm").click(function(){
+(function () {
+
+    // milli seconds to define the pressing time
+    var longpress = 500;
+    // holds the start time
+    var start;
+
+    $("#activity_table tbody").on('mousedown touchstart', 'tr', function (e) {
+        start = new Date().getTime();
+    });
+
+    $("#activity_table tbody").on('mouseleave', 'tr', function (e) {
+        start = 0;
+    });
+
+    $("#activity_table tbody").on('mouseup touchend', 'tr', function (e) {
+        if (new Date().getTime() >= (start + longpress)) {
+            $("#deleteModal").modal('toggle');
+        }
+    });
+
+}());
+
+$("#delete_confirm").click(function () {
     // alert('Inside');
     console.log(table_activity.row('.selected').data());
     activityDelete(table_activity.row('.selected').data());
 });
 
-$("#edit_expense").click(function(){
+$("#edit_expense").click(function () {
     // alert('Inside');
     console.log(table_activity.row('.selected').data());
     // activityDelete();
 });
 
-function activityDelete(element){
+function activityDelete(element) {
     console.log(element);
     let id = element["_id"];
     $.ajax({
-        url:"/activities/"+id,
+        url: "/activities/" + id,
         type: "DELETE"
-    }).done(function(data){
+    }).done(function (data) {
         console.log(data);
         table_activity.row('.selected').remove().draw(true);
         $('#deleteModal').modal('toggle');
         // $(element).parent().parent().parent().remove();
-    }).fail(function(){
+    }).fail(function () {
         alert("error");
         $('#deleteModal').modal('toggle');
     });
@@ -143,7 +211,7 @@ $.fn.dataTable.ext.search.push(
             } else {
                 isReDrawName = false;
             }
-        }else{
+        } else {
             isReDrawName = true;
         }
         if (filter_category) {
@@ -152,7 +220,7 @@ $.fn.dataTable.ext.search.push(
             } else {
                 isReDrawCategory = false;
             }
-        } else{
+        } else {
             isReDrawCategory = true;
         }
         if (filter_type) {
@@ -161,7 +229,7 @@ $.fn.dataTable.ext.search.push(
             } else {
                 isReDrawType = false;
             }
-        } else{
+        } else {
             isReDrawType = true;
         }
         if (filter_reason) {
@@ -170,7 +238,7 @@ $.fn.dataTable.ext.search.push(
             } else {
                 isReDrawReason = false;
             }
-        } else{
+        } else {
             isReDrawReason = true;
         }
         let min = parseInt($('#filter_amt_min').val(), 10);

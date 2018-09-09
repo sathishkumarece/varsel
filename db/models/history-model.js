@@ -1,21 +1,25 @@
 //To maintain the modification history for particular activity
 const mongoose = require('mongoose'),
-// autoIncreament = require('mongoose-auto-increment'),
-Schema = mongoose.Schema;
+    // autoIncreament = require('mongoose-auto-increment'),
+    Schema = mongoose.Schema;
 
 var HistorySchema = new Schema({
-    activityId : Number,
+    activityId: Number,
     history: [
         {
-            key: String,
-            value: {
-                old: String,
-                new: String
-            },
-            date: {type: Date, default: Date.now}
+            date: { type: Date, default: Date.now },
+            changes: [
+                {
+                    key: String,
+                    value: {
+                        old: String,
+                        new: String
+                    }
+                }
+            ]
         }
     ],
-},{collection: 'histories'});
+}, { collection: 'histories' });
 
 var HistoryModel = mongoose.model('History', HistorySchema);
 

@@ -20,15 +20,14 @@ router.get('/history', (req, res, next) =>{
       var msg = [];
       history.forEach(element => {
           let historyArray = element.history;
-          var key;
-          var oldValue;
-          var newValue;
           historyArray.forEach((hist)=>{
-              key = hist.key;
-              oldValue = hist.value.old;
-              newValue = hist.value.new;
-              let date = dateFormat(hist.date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-              msg.push(`"${key}" has been modified from "${oldValue}" to "${newValue}" on "${date}"`);
+              let date = dateFormat(hist.date, "yyyy-mm-dd, h:MM:ss");
+              let values = [];
+              hist.changes.forEach((change)=>{
+                values.push(`"${change.key}" has been modified from "${change.value.old}" to "${change.value.new}"`);
+              });
+              msg.push({'key':date,
+                    'values':values});
           });
       });
       res.json(msg);
@@ -45,7 +44,7 @@ router.get('/history', (req, res, next) =>{
   
    /* Update history for particular activity id */
    router.put('/history/:id', (req, res, next) => {
-    History.update({'activityId':req.params.id}, {$push: {'history':req.body}}, (err, post) => {
+    History.update({'activityId':req.params.id}, {$push: {'history':{'changes':req.body}}}, (err, post) => {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
     });

@@ -62,7 +62,7 @@ router.get('/activities/:person/calc', (req, res, next) =>{
       });
       console.log(data);
       // res.redirect(req.baseUrl+'/history/1003');
-      History.update({'activityId':req.params.id}, {$push: {'history':data}}, (err, {post}) => {
+      History.update({'activityId':req.params.id}, {$push: {'history':{'changes':data}}}, (err, {post}) => {
         if (err) return next(err);
         res.json({"status":"Successfully updated"});
       });
