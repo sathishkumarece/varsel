@@ -907,3 +907,12 @@ th.head-item{
     color: #4e4e4e;
     font-size: 30px;
 }
+
+.searchbox-input{
+    border-radius: 50px !important;
+}
+
+.input-group-append.search-div{
+    margin-left: -55px;
+    position: relative;
+}

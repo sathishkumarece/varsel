@@ -16,15 +16,16 @@
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="lib/socicon/css/styles.css">
     <!-- <link rel="stylesheet" href="lib/datatables/data-tables.bootstrap4.min.css"> -->
+    <!-- CSS for bootstrap date picker -->
+    <link rel="stylesheet" href="../lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="lib/dropdown/css/style.css">
     <link rel="stylesheet" href="lib/theme/css/style.css">
     <link rel="stylesheet" href="lib/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="http://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-select/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="lib/mobirise/css/mbr-additional.css" type="text/css">
     <link rel="stylesheet" href="./css/varsel.css">
-
-
 </head>
 
 <body>
@@ -140,7 +141,7 @@
                         <button class="btn btn-primary btn-md advance_search_button" data-toggle="collapse" data-target="#form_advance_search">Advance Search</button>
                     </div>
                     <div class="col-md-4">
-                        <button id="edit_expense" class="btn btn-primary btn-md advance_search_button">Edit Expense</button>
+                        <button id="edit_expense" class="btn btn-primary btn-md advance_search_button" data-toggle="modal" data-target="#editModal">Edit Expense</button>
                     </div>
                     <div class="col-md-4">
                         <button id="delete_expense" class="btn btn-primary btn-md advance_search_button" data-toggle="modal" data-target="#deleteModal">Delete Expense</button>
@@ -301,21 +302,80 @@
             <div class="modal-dialog modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header align-center">
-                        <div class="icon-box">
-                            <!-- <i class="material-icons">&#xE5CD;</i> -->
-                            <i class="fa fa-times animated rotateIn"></i>
-                        </div>
-                        <br>
-                        <h4 class="modal-title">Are you sure?</h4>
+                        <h4 class="modal-title">Edit Expense</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <p>Do you really want to delete these records? This process cannot be undone.</p>
+                            <form action="">
+                                    <div class="form-group row">
+                                        <label for="getName" class="col-sm-2 col-form-label">Whom:</label>
+                                        <div class="col-sm-10">
+                                            <select id="getName" name="person_name" class="selectpicker show-tick form-control myNameClass" data-live-search="true">
+                                                <!-- <option selected>Bla</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="amount" class="col-sm-2 col-form-label">Amount:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="amount" step="any" class="form-control" id="amount" placeholder="Enter amount">
+                                        </div>
+                                    </div>
+                                    <!-- Date picker form -->
+                                    <div class="form-group row">
+                                        <label for="datepicker" class="col-sm-2 col-form-label">Date:</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group date">
+                                                <!-- <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div> -->
+                                                <input type="text" name="date" class="form-control pull-right" id="datepicker" placeholder="Choose date" value="01/01/2017">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="reason" class="col-sm-2 col-form-label">Reason:</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="information" id="reason" placeholder="Enter reason..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="category" class="col-sm-2 col-form-label">Category:</label>
+                                        <div class="col-sm-10">
+                                            <select id='category' name="category" class="selectpicker show-tick form-control myCategory" data-live-search="true">
+                                                <option selected>Salary</option>
+                                                <option>Food</option>
+                                                <option>Study</option>
+                                                <option>Shopping</option>
+                                                <option>Travel</option>
+                                                <option>Household</option>
+                                                <option>Doctor</option>
+                                                <option>Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ml-auto">
+                                            <label for="expenseType" class="col-form-label float-right">Debit</label>
+                                            <!-- <div class="col-sm-2"> -->
+                                                <label class="custom-toggle">
+                                                    <input type="checkbox" class="form-control" id="expenseType" name="type" value="Credit">
+                                                    <span class="custom-toggle-slider rounded-circle"></span>
+                                                </label>
+                                                <input id='testNameHidden' type='hidden' value='Debit' name='type'>
+                                            <!-- </div> -->
+                                            <label for="expenseType" class="col-form-label float-left">Credit</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" value="true" name="has_history">
+                                        <input type="hidden" value="false" name="delete_flag"> 
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
                     </div>
-                    <div class="modal-footer align-center">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    <!-- <div class="modal-footer align-center">
                         <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -459,8 +519,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+  <!-- JavaScript for bootstrap date picker -->
+    <script src="lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
-    <script src="js/person.js"></script>
+    <!-- <script src="js/person.js"></script> -->
+    <script src="js/namePicker.js"></script>
     <script src="js/retrieveExpense.js"></script>
 </body>
 

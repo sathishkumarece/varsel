@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Activity = require('../db/models/activity-model');
 const History = require('../db/models/history-model');
+const dateFormat = require('dateformat');
 
 /* GET ALL activities */
 router.get('/activities', (req, res, next) =>{
@@ -58,11 +59,19 @@ router.get('/activities/:person/calc', (req, res, next) =>{
       let keys = Object.keys(req.body);
       console.log(keys);
       keys.forEach( value =>{
-        data.push(historyObj(value, post[value], req.body[value]));
+        let oldValue = post[value];
+        if('date'===value)
+        {
+          oldValue = dateFormat(oldValue,'mm/dd/yyyy');
+        }
+        if(('delete_flag'!==value) && (oldValue!==req.body[value])){
+          data.push(historyObj(value, oldValue, req.body[value]));
+        }
       });
       console.log(data);
       // res.redirect(req.baseUrl+'/history/1003');
-      History.update({'activityId':req.params.id}, {$push: {'history':{'changes':data}}}, (err, {post}) => {
+      History.findOneAndUpdate({'activityId':req.params.id}, {$push: {'history':{'changes':data}}}, 
+      {upsert:true}, (err, {post}) => {
         if (err) return next(err);
         res.json({"status":"Successfully updated"});
       });

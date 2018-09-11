@@ -168,9 +168,51 @@ $("#delete_confirm").click(function () {
 
 $("#edit_expense").click(function () {
     // alert('Inside');
-    console.log(table_activity.row('.selected').data());
+    let row = table_activity.row('.selected').data();
+    // $('input[name="person_name"]').attr("value", row['person_name']);
+    updateNameSelect(row['person_name']);
+    $('input[name="amount"]').attr("value", row['amount']);
+    $('input[name="date"]').attr("value", dateFormat(row['date']));
+    $('textarea[name="information"]').val(row['information']);
+    updateCategorySelect(row['category']);
+    if(row['type']==='Credit'){
+        $('#expenseType').prop('checked', true);
+    }else{
+        $('#expenseType').prop('checked', false);
+    }
     // activityDelete();
 });
+
+function dateFormat (d) {
+    return moment(d).format("MM/DD/YYYY");
+}
+
+function updateNameSelect(option){
+    $('button[data-id="getName"]').attr("title",option);
+    $('button[data-id="getName"] span.filter-option').text(option);
+    $('div.myNameClass div.open div.inner a').removeClass('selected');
+    $('div.myNameClass div.open div.inner a').filter(function() {
+        // Matches exact string   
+        return $(this).find('.text').text() === option;
+        }).addClass('selected');
+    $('#getName option').attr("selected",false);
+    $('#getName option').filter(function() {
+        // Matches exact string   
+        return $(this).text() === option;
+        }).attr("selected","selected");
+}
+
+function updateCategorySelect(option){
+    $('button[data-id="category"]').attr("title",option);
+    $('button[data-id="category"] span.filter-option').text(option);
+    $('div.myCategory div.open div.inner a').removeClass('selected');
+    $('div.myCategory div.open div.inner a').filter(function() {
+        // Matches exact string   
+        return $(this).find('.text').text() === option;
+        }).addClass('selected');
+    $('#category option').attr("selected","selected");
+    $('#category option:contains('+option+')').attr("selected","selected");
+}
 
 function activityDelete(element) {
     console.log(element);
@@ -260,3 +302,31 @@ $.fn.dataTable.ext.search.push(
         }
     }
 );
+
+$("form").submit(function (e) {
+    if (document.getElementById("expenseType").checked) {
+        document.getElementById('testNameHidden').disabled = true;
+    }
+    let row = table_activity.row('.selected').data();
+    let form_val = $("form").serialize();
+    $.ajax({
+        url: '/activities/'+row['person_name']+'/'+row['_id'],
+        type: 'PUT',
+        data: form_val,
+        async: false,
+        success: function (data) {
+            setTimeout(function () {
+                console.log(data);
+            }, 2000);
+            $('#editModal').modal('hide');
+            table_activity.ajax.reload();
+        },
+        error: function () {
+            console.log('error occured');
+        },
+        complete: function () {
+            // location.href = "/html/managePerson.html";
+            // showNotification('top','right');
+        }
+    });
+});

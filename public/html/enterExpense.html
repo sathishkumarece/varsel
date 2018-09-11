@@ -121,17 +121,18 @@
                     </div>
                 </div>
                 <div class="form-group row ml-auto">
-                    <label for="expenseType" class="col-form-label float-right">Credit</label>
+                    <label for="expenseType" class="col-form-label float-right">Debit</label>
                     <!-- <div class="col-sm-2"> -->
                         <label class="custom-toggle">
-                            <input type="checkbox" class="form-control" id="expenseType" name="type" value="Debit">
+                            <input type="checkbox" class="form-control" id="expenseType" name="type" value="Credit">
                             <span class="custom-toggle-slider rounded-circle"></span>
                         </label>
-                        <input id='testNameHidden' type='hidden' value='Credit' name='type'>
+                        <input id='testNameHidden' type='hidden' value='Debit' name='type'>
                     <!-- </div> -->
-                    <label for="expenseType" class="col-form-label float-left">Debit</label>
+                    <label for="expenseType" class="col-form-label float-left">Credit</label>
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="has_history" value="false">
                     <input type="hidden" value="false" name="delete_flag"> 
                     <button type="submit" class="btn btn-sm btn-primary display-4 custom-button">
                         <span class="mbri-save mbr-iconfont mbr-iconfont-btn"></span>Save</button>
@@ -148,6 +149,7 @@
     <!-- JavaScript for bootstrap date picker -->
     <script src="../lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
+    <script src="../js/namePicker.js"></script>
     <script src="../js/enterExpense.js"></script>
 </body>
 
