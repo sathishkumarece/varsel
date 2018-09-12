@@ -103,9 +103,12 @@ function timeline(data) {
             '<div class="timeline">' +
             '<div class="timeline-content">' +
             '<span class="year">' + val.key + '</span>' +
-            '<p class="description">' +
-            val.values +
-            '</p>' +
+            '<p class="description">';
+            timelineVal = timelineVal.concat(midRegion);
+            val.values.forEach(v =>{
+                timelineVal = timelineVal.concat(v);
+            });
+            midRegion = '</p>' +
             '</div>' +
             '</div>';
         timelineVal = timelineVal.concat(midRegion);
@@ -210,7 +213,7 @@ function updateCategorySelect(option){
         // Matches exact string   
         return $(this).find('.text').text() === option;
         }).addClass('selected');
-    $('#category option').attr("selected","selected");
+    $('#category option').removeAttr("selected");
     $('#category option:contains('+option+')').attr("selected","selected");
 }
 

@@ -916,3 +916,10 @@ th.head-item{
     margin-left: -55px;
     position: relative;
 }
+
+.input-group-text{
+    background-color: #f5f5f5; 
+    /* color: #000000;  */
+    border-radius:50px !important;
+    line-height: 1.3;
+}

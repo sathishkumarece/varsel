@@ -24,7 +24,7 @@ router.get('/history', (req, res, next) =>{
               let date = dateFormat(hist.date, "yyyy-mm-dd, h:MM:ss");
               let values = [];
               hist.changes.forEach((change)=>{
-                values.push(`"${change.key}" has been modified from "${change.value.old}" to "${change.value.new}"`);
+                values.push(`<b>${change.key}</b> has been modified from "${change.value.old}" to "${change.value.new}"<br>`);
               });
               msg.push({'key':date,
                     'values':values});

@@ -64,15 +64,16 @@ router.get('/activities/:person/calc', (req, res, next) =>{
         {
           oldValue = dateFormat(oldValue,'mm/dd/yyyy');
         }
-        if(('delete_flag'!==value) && (oldValue!==req.body[value])){
+        if(('delete_flag'!==value) && 'has_history'!==value && (oldValue!=req.body[value])){
           data.push(historyObj(value, oldValue, req.body[value]));
         }
       });
       console.log(data);
       // res.redirect(req.baseUrl+'/history/1003');
       History.findOneAndUpdate({'activityId':req.params.id}, {$push: {'history':{'changes':data}}}, 
-      {upsert:true}, (err, {post}) => {
+      {upsert:true}, (err, post) => {
         if (err) return next(err);
+        console.log(post);
         res.json({"status":"Successfully updated"});
       });
     });
