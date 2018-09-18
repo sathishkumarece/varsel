@@ -74,6 +74,9 @@ $(document).ready(function () {
 
 });
 
+/**
+ * 
+ */
 $('#search').click(() => {
     table_activity.draw();
 });
@@ -93,7 +96,10 @@ function showHistory(element) {
 
     });
 };
-
+/**
+ * Function to construct timeline to show history data
+ * @param {*} data 
+ */
 function timeline(data) {
     var timelineVal = '<div class="row">' +
         '<div class="col-md-12">' +

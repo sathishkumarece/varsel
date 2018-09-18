@@ -923,3 +923,35 @@ th.head-item{
     border-radius:50px !important;
     line-height: 1.3;
 }
+
+.height-400 {
+    height: 400px !important;
+}
+
+/* CSS for Doughnut chart */
+
+.doughnut-card-header .heading-elements-toggle {
+    background-color: inherit;
+    position: absolute;
+    top: 14px;
+    right: 21px;
+}
+
+.doughnut-card-header .heading-elements, .doughnut-card-header .heading-elements-toggle {
+    background-color: inherit;
+    position: absolute;
+    top: 14px;
+    right: 21px;
+}
+
+.chart-card{
+    background-color: #fff;
+    margin-top: 1.875rem;
+    margin-bottom: 1.875rem;
+}
+
+@media (min-width: 992px){
+    .heading-elements-toggle {
+        display: none;
+    }
+}
