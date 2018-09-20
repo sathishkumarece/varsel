@@ -13,7 +13,7 @@ historyRouter = require('./routes/history-route');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/varsel', { useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1:27017/varsel', { useNewUrlParser: true })
 .then(()=> console.log('DB connection successful')
 ).catch((err)=>{
     console.error(err);
