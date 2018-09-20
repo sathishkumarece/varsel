@@ -10,10 +10,18 @@ const personRouter = require('./routes/person-route'),
 activityRouter = require('./routes/activity-route'),
 historyRouter = require('./routes/history-route');
 
+var db_name = 'varsel';
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://127.0.0.1:27017/varsel', { useNewUrlParser: true })
+//provide a sensible default for local development
+var mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}
+
+mongoose.connect(mongodb_connection_string, { useNewUrlParser: true })
 .then(()=> console.log('DB connection successful')
 ).catch((err)=>{
     console.error(err);
