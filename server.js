@@ -23,7 +23,7 @@ console.log(process.env);
 if(process.env.OPENSHIFT_MONGODB_DB_URL){
   mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
 }
-
+mongodb_connection_string = 'mongodb://userIEC:inPSs4qtkniWP2gv@172.30.37.78:27017/' + db_name;
 mongoose.connect(mongodb_connection_string, { useNewUrlParser: true })
 .then(()=> console.log('DB connection successful')
 ).catch((err)=>{
