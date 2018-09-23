@@ -1,4 +1,4 @@
-var table_activity, isMobile;
+var table_activity, isMobile, count = 0;
 $(document).ready(function () {
 
     $('#edit_expense').hide();
@@ -110,11 +110,11 @@ function timeline(data) {
             '<div class="timeline-content">' +
             '<span class="year">' + val.key + '</span>' +
             '<p class="description">';
-            timelineVal = timelineVal.concat(midRegion);
-            val.values.forEach(v =>{
-                timelineVal = timelineVal.concat(v);
-            });
-            midRegion = '</p>' +
+        timelineVal = timelineVal.concat(midRegion);
+        val.values.forEach(v => {
+            timelineVal = timelineVal.concat(v);
+        });
+        midRegion = '</p>' +
             '</div>' +
             '</div>';
         timelineVal = timelineVal.concat(midRegion);
@@ -124,37 +124,61 @@ function timeline(data) {
 };
 
 $("#activity_table tbody").on('click', 'tr', function () {
-    if ($(this).hasClass('selected')) {
-        if (!isMobile.any()) {
-            $('#edit_expense').hide();
-            $('#delete_expense').hide();
+    if (count != 2) {
+        if ($(this).hasClass('selected')) {
+            if (!isMobile.any()) {
+                $('#edit_expense').hide();
+                $('#delete_expense').hide();
+            }
+            $(this).removeClass('selected');
+        } else {
+            if (!isMobile.any()) {
+                $('#edit_expense').show();
+                $('#delete_expense').show();
+            }
+            table_activity.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            console.log(this);
         }
-        $(this).removeClass('selected');
-    } else {
-        if (!isMobile.any()) {
-            $('#edit_expense').show();
-            $('#delete_expense').show();
-        }
-        table_activity.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-        console.log(this);
     }
 });
 
 $("#activity_table tbody").on('dblclick', 'tr', function () {
-    console.log('test');
-    $("#editModal").modal('toggle');
+    // console.log('test');
+    // let row = table_activity.row('.selected').data();
+    // // $('input[name="person_name"]').attr("value", row['person_name']);
+    // updateNameSelect(row['person_name']);
+    // $('input[name="amount"]').attr("value", row['amount']);
+    // $('input[name="date"]').attr("value", dateFormat(row['date']));
+    // $('textarea[name="information"]').val(row['information']);
+    // updateCategorySelect(row['category']);
+    // if(row['type']==='Credit'){
+    //     $('#expenseType').prop('checked', true);
+    // }else{
+    //     $('#expenseType').prop('checked', false);
+    // }
+    // $("#editModal").modal('toggle');
 });
 
 (function () {
 
     // milli seconds to define the pressing time
     var longpress = 500;
+    var doubleClick = 1000;
     // holds the start time
-    var start;
+    var start, firstStart;
 
     $("#activity_table tbody").on('mousedown touchstart', 'tr', function (e) {
         start = new Date().getTime();
+        if (count == 0) {
+            firstStart = start;
+        }
+        if (start >= (firstStart + doubleClick)) {
+            count = 0;
+            firstStart = start;
+        }
+        console.log('Start: ' + start);
+        console.log('FisrtStart: ' + firstStart);
     });
 
     $("#activity_table tbody").on('mouseleave', 'tr', function (e) {
@@ -164,10 +188,27 @@ $("#activity_table tbody").on('dblclick', 'tr', function () {
     $("#activity_table tbody").on('mouseup touchend', 'tr', function (e) {
         if (new Date().getTime() >= (start + longpress)) {
             $("#deleteModal").modal('toggle');
+            count = 0;
+        } else {
+            // console.log(count);
+            if (count == 1 && new Date().getTime() <= (firstStart + doubleClick)) {
+                // console.log('I am in double');
+                // count = 0;
+                // console.log($(this));
+                $(this).addClass('selected');
+                editExpense();
+                $("#editModal").modal('toggle');
+            }
+            count = count + 1;
         }
     });
 
 }());
+
+$('#editModal').on('hide.bs.modal', function (e) {
+    console.log('modal hide');
+    count = 0;
+});
 
 $("#delete_confirm").click(function () {
     // alert('Inside');
@@ -177,6 +218,11 @@ $("#delete_confirm").click(function () {
 
 $("#edit_expense").click(function () {
     // alert('Inside');
+    editExpense();
+    // activityDelete();
+});
+
+function editExpense() {
     let row = table_activity.row('.selected').data();
     // $('input[name="person_name"]').attr("value", row['person_name']);
     updateNameSelect(row['person_name']);
@@ -184,43 +230,42 @@ $("#edit_expense").click(function () {
     $('input[name="date"]').attr("value", dateFormat(row['date']));
     $('textarea[name="information"]').val(row['information']);
     updateCategorySelect(row['category']);
-    if(row['type']==='Credit'){
+    if (row['type'] === 'Credit') {
         $('#expenseType').prop('checked', true);
-    }else{
+    } else {
         $('#expenseType').prop('checked', false);
     }
-    // activityDelete();
-});
+}
 
-function dateFormat (d) {
+function dateFormat(d) {
     return moment(d).format("MM/DD/YYYY");
 }
 
-function updateNameSelect(option){
-    $('button[data-id="getName"]').attr("title",option);
+function updateNameSelect(option) {
+    $('button[data-id="getName"]').attr("title", option);
     $('button[data-id="getName"] span.filter-option').text(option);
     $('div.myNameClass div.open div.inner a').removeClass('selected');
-    $('div.myNameClass div.open div.inner a').filter(function() {
+    $('div.myNameClass div.open div.inner a').filter(function () {
         // Matches exact string   
         return $(this).find('.text').text() === option;
-        }).addClass('selected');
-    $('#getName option').attr("selected",false);
-    $('#getName option').filter(function() {
+    }).addClass('selected');
+    $('#getName option').attr("selected", false);
+    $('#getName option').filter(function () {
         // Matches exact string   
         return $(this).text() === option;
-        }).attr("selected","selected");
+    }).attr("selected", "selected");
 }
 
-function updateCategorySelect(option){
-    $('button[data-id="category"]').attr("title",option);
+function updateCategorySelect(option) {
+    $('button[data-id="category"]').attr("title", option);
     $('button[data-id="category"] span.filter-option').text(option);
     $('div.myCategory div.open div.inner a').removeClass('selected');
-    $('div.myCategory div.open div.inner a').filter(function() {
+    $('div.myCategory div.open div.inner a').filter(function () {
         // Matches exact string   
         return $(this).find('.text').text() === option;
-        }).addClass('selected');
+    }).addClass('selected');
     $('#category option').removeAttr("selected");
-    $('#category option:contains('+option+')').attr("selected","selected");
+    $('#category option:contains(' + option + ')').attr("selected", "selected");
 }
 
 function activityDelete(element) {
@@ -312,6 +357,9 @@ $.fn.dataTable.ext.search.push(
     }
 );
 
+/**
+ * Update activities information
+ */
 $("form").submit(function (e) {
     if (document.getElementById("expenseType").checked) {
         document.getElementById('testNameHidden').disabled = true;
@@ -319,7 +367,7 @@ $("form").submit(function (e) {
     let row = table_activity.row('.selected').data();
     let form_val = $("form").serialize();
     $.ajax({
-        url: '/activities/'+row['person_name']+'/'+row['_id'],
+        url: '/activities/' + row['person_name'] + '/' + row['_id'],
         type: 'PUT',
         data: form_val,
         async: false,
