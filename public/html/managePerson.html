@@ -69,7 +69,7 @@
                 <div class="col-sm-4 ml-auto input-group mb-3">
                     <input type="search" placeholder="Search specific user.." name="search" class="form-control searchbox-input" required="">
                     <div class="input-group-append search-div">
-                    <i class="fa fa-search fa-2x input-group-text"></i>
+                    <i class="fa fa-search fa-2x input-group-text search-group-text"></i>
                     </div>
                 </div>
             </div>
@@ -82,6 +82,30 @@
             <a id="back-to-top" href="#" class="btn back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><i class="fas fa-chevron-circle-up fa-2x"></i></a>
         </div>
     </div>
+    <!-- Delete Modal HTML -->
+    <div id="deleteModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header align-center">
+                    <div class="icon-box">
+                        <!-- <i class="material-icons">&#xE5CD;</i> -->
+                        <i class="fa fa-times animated rotateIn"></i>
+                    </div>
+                    <br>
+                    <h4 class="modal-title">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer align-center">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Delete Modal -->
     <div class="fixed-plugin">
         <a href="enterExpense.html" aria-expanded="true">
             <span class="mbri-cash mbr-iconfont mbr-iconfont-btn"></span>
