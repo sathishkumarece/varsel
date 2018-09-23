@@ -86,6 +86,40 @@ function echartCreditConfig(credit_data) {
                         data: ['Salary', 'Food', 'Study', 'Shopping', 'Travel', 'Household', 'Doctor', 'Others']
                     },
 
+                    tooltip : {         // Option config. Can be overwrited by series or data
+                        trigger: 'item',
+                        //show: true,   //default true
+                        showDelay: 0,
+                        hideDelay: 50,
+                        transitionDuration:0,
+                        backgroundColor : 'rgba(255,255,255,0)',
+                        borderColor : 'rgba(255,255,255,0)',
+                        borderRadius : 8,
+                        borderWidth: 2,
+                        padding: 10,    // [5, 10, 15, 20]
+                        position : 'center',
+                        textStyle : {
+                            color: 'black',
+                            decoration: 'none',
+                            fontFamily: 'Verdana, sans-serif',
+                            fontSize: 12,
+                            // fontStyle: 'italic',
+                            // fontWeight: 'bold'
+                        },
+                        formatter: function (params,ticket,callback) {
+                            console.log(params)
+                            var res = 'Function formatter : <br/>' + params[0].name;
+                            for (var i = 0, l = params.length; i < l; i++) {
+                                res += '<br/>' + params[i].seriesName + ' : ' + params[i].value;
+                            }
+                            setTimeout(function (){
+                                callback(ticket, res);
+                            }, 1000)
+                            return 'loading';
+                        }
+                        //formatter: "Template formatter: <br/>{b}<br/>{a}:{c}<br/>{a1}:{c1}"
+                    },
+
                     // Add custom colors
                     // color: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#16D39A'],
 
@@ -168,6 +202,13 @@ function echartCreditConfig(credit_data) {
                                         }
                                     }
                                 }
+                            },
+
+                            tooltip : {             // Series config.
+                                trigger: 'item',
+                                // backgroundColor: 'black',
+                                position : 'center',
+                                formatter: '{b}' + '\n\n' + '{c}€ ({d}%)'
                             },
 
                             data: credit_data

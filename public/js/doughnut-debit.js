@@ -180,8 +180,6 @@ function echartDebitConfig(debit_data) {
                                 normal: {
                                     label: {
                                         show: true,
-                                        formatter: '{b}' + '\n\n' + '{c}€ ({d}%)',
-                                        position: 'outer'
                                     },
                                     labelLine: {
                                         show: true
