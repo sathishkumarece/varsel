@@ -46,26 +46,7 @@ $(document).ready(function () {
         responsive: true
     });
 
-    isMobile = {
-        Android: function () {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function () {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function () {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function () {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function () {
-            return navigator.userAgent.match(/IEMobile/i);
-        },
-        any: function () {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-    };
+
 
     // Event listener to the two range filtering inputs to redraw on input
     // $('#min, #max').keyup( function() {
@@ -162,51 +143,107 @@ $("#activity_table tbody").on('dblclick', 'tr', function () {
 
 (function () {
 
+    isMobile = {
+        Android: function () {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function () {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function () {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function () {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function () {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function () {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
     // milli seconds to define the pressing time
     var longpress = 500;
     var doubleClick = 1000;
     // holds the start time
     var start, firstStart;
 
-    $("#activity_table tbody").on('mousedown touchstart', 'tr', function (e) {
-        start = new Date().getTime();
-        if (count == 0) {
-            firstStart = start;
-        }
-        if (start >= (firstStart + doubleClick)) {
-            count = 0;
-            firstStart = start;
-        }
-        console.log('Start: ' + start);
-        console.log('FisrtStart: ' + firstStart);
-    });
+    if (isMobile.any()) {
+        $("#activity_table tbody").on('touchstart', 'tr', function (e) {
+            start = new Date().getTime();
+            if (count == 0) {
+                firstStart = start;
+            }
+            if (start >= (firstStart + doubleClick)) {
+                count = 0;
+                firstStart = start;
+            }
+            console.log('Start: ' + start);
+            console.log('FisrtStart: ' + firstStart);
+        });
+    } else {
+        $("#activity_table tbody").on('mousedown', 'tr', function (e) {
+            start = new Date().getTime();
+            if (count == 0) {
+                firstStart = start;
+            }
+            if (start >= (firstStart + doubleClick)) {
+                count = 0;
+                firstStart = start;
+            }
+            console.log('Start: ' + start);
+            console.log('FisrtStart: ' + firstStart);
+        });
+    }
 
     $("#activity_table tbody").on('mouseleave', 'tr', function (e) {
         start = 0;
     });
 
-    $("#activity_table tbody").on('mouseup touchend', 'tr', function (e) {
-        if (new Date().getTime() >= (start + longpress)) {
-            $("#deleteModal").modal('toggle');
-            count = 0;
-        } else {
-            // console.log(count);
-            if (count == 1 && new Date().getTime() <= (firstStart + doubleClick)) {
-                // console.log('I am in double');
-                // count = 0;
-                // console.log($(this));
-                $(this).addClass('selected');
-                editExpense();
-                $("#editModal").modal('toggle');
+    if (isMobile.any()) {
+        $("#activity_table tbody").on('touchend', 'tr', function (e) {
+            if (new Date().getTime() >= (start + longpress)) {
+                $("#deleteModal").modal('toggle');
+                count = 0;
+            } else {
+                console.log(count);
+                if (count == 1 && new Date().getTime() <= (firstStart + doubleClick)) {
+                    console.log('I am in double');
+                    // count = 0;
+                    console.log($(this));
+                    $(this).addClass('selected');
+                    editExpense();
+                    $("#editModal").modal('toggle');
+                }
+                count = count + 1;
             }
-            count = count + 1;
-        }
-    });
+        });
+    } else {
+        $("#activity_table tbody").on('mouseup', 'tr', function (e) {
+            if (new Date().getTime() >= (start + longpress)) {
+                $("#deleteModal").modal('toggle');
+                count = 0;
+            } else {
+                console.log(count);
+                if (count == 1 && new Date().getTime() <= (firstStart + doubleClick)) {
+                    console.log('I am in double');
+                    // count = 0;
+                    console.log($(this));
+                    $(this).addClass('selected');
+                    editExpense();
+                    $("#editModal").modal('toggle');
+                }
+                count = count + 1;
+            }
+        });
+    }
 
 }());
 
 $('#editModal').on('hide.bs.modal', function (e) {
     console.log('modal hide');
+    table_activity.$('tr.selected').removeClass('selected');
     count = 0;
 });
 
