@@ -171,12 +171,13 @@ th.head-item{
     color: #ec4545 !important;
 }
 
-.back-to-top {
+.backtotop {
     cursor: pointer;
     position: fixed;
     bottom: 5px;
     right: 5px;
     display:none;
+    margin: 0% !important;
 }
 
 .fa-chevron-circle-up{

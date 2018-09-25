@@ -39,21 +39,25 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50) {
-            $('#back-to-top').fadeIn();
+            $('#backtotop').fadeIn();
         } else {
-            $('#back-to-top').fadeOut();
+            $('#backtotop').fadeOut();
         }
     });
     // scroll body to 0px on click
-    $('#back-to-top').click(function () {
-        $('#back-to-top').tooltip('hide');
-        $('body,html').animate({
-            scrollTop: 0
-        }, 800);
+    $('#backtotop').click(function () {
+        $('#backtotop').tooltip('hide');
+        // if (navigator.userAgent.match(/(iPod|iPhone|iPad|Android)/)) {
+        //     window.scrollTo(200, 100) // first value for left offset, second value for top offset
+        // } else {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+        // }
         return false;
     });
-    
-    $('#back-to-top').tooltip('show');
+
+    $('#backtotop').tooltip('show');
 });
 $('.searchbox-input').on('keyup', function () {
     var filter = $(this).val(); // get the value of the input, which we filter on
@@ -88,16 +92,16 @@ function userEdit(element) {
     location.href = `/html/updatePerson.html?name=${name}&email=${content[2]}&address=${content[3]}&phone=${content[4]}`;
 };
 
-function userDelete(element){
+function userDelete(element) {
     console.log(element);
     let name = $(element).parent().children()[2].innerText;
     $.ajax({
-        url:"/person"+"?"+$.param({"name_en":name}),
+        url: "/person" + "?" + $.param({ "name_en": name }),
         type: "DELETE"
-    }).done(function(data){
+    }).done(function (data) {
         console.log(data);
         $(element).parent().parent().parent().remove();
-    }).fail(function(){
+    }).fail(function () {
         alert("error");
     });
 }
