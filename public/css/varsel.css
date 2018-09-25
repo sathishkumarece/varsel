@@ -36,7 +36,7 @@ h2{
 }
 @media only screen and (max-width: 767px){
     .modal-dialog{
-        min-width: 60%;
+        max-width: 96%;
         min-height: 60%;
         padding: 10px;
         padding-top: 50px;
