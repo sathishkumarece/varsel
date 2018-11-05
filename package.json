@@ -1,7 +1,7 @@
 {
   "name": "varsel",
   "version": "1.0.0",
-  "description": "No maintain credit and debit",
+  "description": "To maintain credit and debit",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -13,9 +13,11 @@
     "express": "^4.16.2",
     "mongoose": "^5.2.1",
     "mongoose-auto-increment": "^5.0.1",
-    "method-override":"^2.3.10",
+    "method-override": "^2.3.10",
     "dateformat": "3.0.3",
-    "translate":"1.0.2"
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "bcrypt": "^3.0.1"
   },
   "author": "Sathishkumar NATARAJ",
   "license": "MIT"

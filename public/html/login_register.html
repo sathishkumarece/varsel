@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Register</title>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/varsel_login.css">
+</head>
+<body>
+    <div class="container">
+           
+        <header>
+            <h1>Login & Registration</h1>
+            
+        </header>
+        <section>				
+            <div id="container_demo" >
+                <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                <a class="hiddenanchor" id="toregister"></a>
+                <a class="hiddenanchor" id="tologin"></a>
+                <div id="wrapper">
+                    <div id="login" class="animate form">
+                        <form id="form_login"> 
+                            <h1>Log in</h1> 
+                            <div class="form-group"> 
+                                <label for="username" class="uname" > Your email or username </label>
+                                <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="password" class="youpasswd"> Your password </label>
+                                <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                            </div>
+                            <div class="form-group keeplogin"> 
+                                <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+                                <label for="loginkeeping">Keep me logged in</label>
+                            </div>
+                            <div class="form-group login button"> 
+                                <button type="submit" value="Login">Login</button>
+                            </div>
+                            <p class="change_link">
+                                Not a member yet ?
+                                <a href="#toregister" class="to_register">Join us</a>
+                            </p>
+                        </form>
+                    </div>
+
+                    <div id="register" class="animate form">
+                        <form id="form_signup"> 
+                            <h1> Register </h1> 
+                            <div class="form-group"> 
+                                <label for="usernamesignup" class="uname" >Your username</label>
+                                <input id="usernamesignup" name="userName" required="required" type="text" placeholder="mysuperusername690" />
+                                <div id="error_message_username">Person already exist!</div>
+                            </p>
+                            <div class="form-group"> 
+                                <label for="emailsignup" class="youmail"  > Your email</label>
+                                <input id="emailsignup" name="email" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                <div id="error_message_email">Email already exist!</div>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="passwordsignup" class="youpasswd" >Your password </label>
+                                <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="passwordsignup_confirm" class="youpasswd" >Please confirm your password </label>
+                                <input id="passwordsignup_confirm" name="password_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                            </div>
+                            <div class="form-group signin button"> 
+                                <button type="submit" value="Sign up">Sign up</button> 
+                            </div>
+                            <p class="change_link">  
+                                Already a member ?
+                                <a href="#tologin" class="to_register"> Go and log in </a>
+                            </p>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>  
+        </section>
+    </div>
+    <script src="../lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../lib/popper/popper.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/login_register.js"></script>
+</body>
+</html>

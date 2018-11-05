@@ -1,7 +1,7 @@
 // Router for history
 const express = require('express');
 const router = express.Router();
-const History = require('../db/models/history-model');
+const History = require('../db/models/historyModel');
 const dateFormat = require('dateformat');
 
 /* GET ALL HISTORY */

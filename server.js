@@ -6,9 +6,14 @@ const app = express();
 // import personRouter from './routes/person-route';
 const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 const methodOverride = require('method-override'); 
-const personRouter = require('./routes/person-route'),
-activityRouter = require('./routes/activity-route'),
-historyRouter = require('./routes/history-route');
+const personRouter = require('./routes/personRoute'),
+activityRouter = require('./routes/activityRoute'),
+historyRouter = require('./routes/historyRoute'),
+userRouter = require('./routes/userRoute');
+
+//Authentication package
+const session = require('express-session'),
+passport = require('passport');
 
 var db_name = 'varsel';
 
@@ -28,7 +33,7 @@ if (process.env.DATABASE_SERVICE_NAME) {
     mongoUser = process.env[mongoServiceName + '_USER'];
     mongodb_connection_string = 'mongodb://'+mongoUser+':'+mongoPassword+'@'+mongoHost+':'+mongoPort+'/' + mongoDatabase;
 }
-console.log(mongodb_connection_string);
+// console.log(mongodb_connection_string);
 // mongodb_connection_string = 'mongodb://userIEC:inPSs4qtkniWP2gv@172.30.37.78:27017/' + db_name;
 mongoose.connect(mongodb_connection_string, { useNewUrlParser: true })
 .then(()=> console.log('DB connection successful')
@@ -40,9 +45,21 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
+
+//To manage the session
+app.use(session({
+    secret: 'jhfjjlsgtqicgrtvwopsvzi',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Routing to specific router
 app.use('/', personRouter);
 app.use('/', activityRouter);
 app.use('/', historyRouter);
+app.use('/user', userRouter);
 
 // use static pages with express
 app.use(express.static('public'));

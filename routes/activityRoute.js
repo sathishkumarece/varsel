@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Activity = require('../db/models/activity-model');
-const History = require('../db/models/history-model');
+const Activity = require('../db/models/activityModel');
+const History = require('../db/models/historyModel');
 const dateFormat = require('dateformat');
 
 /* GET ALL activities */

@@ -2,8 +2,7 @@
 const express = require('express');
 const router = express.Router();
 // import Person from '../db/models/person-model'
-const Person = require('../db/models/person-model');
-const translate = require('translate');
+const Person = require('../db/models/personModel');
 
 /* GET ALL PERSONS */
 router.get('/person', (req, res, next) =>{
