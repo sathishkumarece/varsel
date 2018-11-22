@@ -5,6 +5,9 @@ $(document).ready(function () {
         type: 'GET',
         url: "/person"
     }).done(function (data) {
+        if(data == 'Access_denied'){
+            location.href = 'login_register.html#tologin';
+        }else{
         data.forEach(element => {
             // var myCol = $('<div class="col-sm-3 col-md-3 pb-2"></div>');
             // var myPanel = $('<div class="card"><div class="card-body"><h4 class="card-title">Card title that wraps to a new line</h4><p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div>');
@@ -35,6 +38,7 @@ $(document).ready(function () {
             // myPanel.appendTo(myCol);
             myPanel.appendTo('#contentPanel');
         });
+    }
     });
 
     $(window).scroll(function () {

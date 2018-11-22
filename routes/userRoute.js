@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 // import Person from '../db/models/person-model'
 const User = require('../db/models/userModel');
+const passport = require('passport');
 
 // Save the user information in the database
 router.post("/", function (req, res, next) {
@@ -10,7 +11,12 @@ router.post("/", function (req, res, next) {
     User.create(req.body, function (err, post) {
         if (err) return next(err);
         console.log(post);
-        res.json(post);
+        console.log(post['_id']);
+        req.login(post['_id'], (err)=>{
+             if(err) return next(err);
+             res.redirect('/');
+        });
+        // res.json(post);
     });
 });
 
@@ -29,6 +35,14 @@ router.get("/:name", function (req, res, next) {
             });
         }
     });
+});
+
+passport.serializeUser((user_id, done)=>{
+    done(null, user_id);
+});
+
+passport.deserializeUser((user_id, done)=>{
+    done(null, user_id);
 });
 
 module.exports = router;

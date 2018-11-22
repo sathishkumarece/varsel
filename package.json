@@ -11,13 +11,15 @@
   ],
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^5.2.1",
+    "mongoose": "^5.3.13",
     "mongoose-auto-increment": "^5.0.1",
     "method-override": "^2.3.10",
     "dateformat": "3.0.3",
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
-    "bcrypt": "^3.0.1"
+    "passport-local": "^1.0.0",
+    "bcrypt": "^3.0.1",
+    "connect-mongo": "^2.0.2"
   },
   "author": "Sathishkumar NATARAJ",
   "license": "MIT"
