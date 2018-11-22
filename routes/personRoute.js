@@ -5,7 +5,7 @@ const router = express.Router();
 const Person = require('../db/models/personModel');
 
 /* GET ALL PERSONS */
-router.get('/person', (req, res, next) =>{
+router.get('/', (req, res, next) =>{
     Person.find({}, 'name_en address phone email name_tn', (err, persons) => {
         console.log(persons);
       if (err) return next(err);
@@ -13,7 +13,7 @@ router.get('/person', (req, res, next) =>{
     }).select("-_id");
   });
 
-  router.get('/person/getname', (req,res, next) =>{
+  router.get('/getname', (req,res, next) =>{
      Person.find({}, 'name_en', (err, persons) => {
        console.log(persons);
        if(err) return next(err);
@@ -22,7 +22,7 @@ router.get('/person', (req, res, next) =>{
   });
   
   /* GET SINGLE PERSON BY person */
-  router.get('/person/:person', (req, res, next) => {
+  router.get('/:person', (req, res, next) => {
     Person.findOne({'name_en':req.params.person}, function (err, person) {
       if (err) return next(err);
       res.json(person);
@@ -30,7 +30,7 @@ router.get('/person', (req, res, next) =>{
   });
   
   /* SAVE PERSON */
-  router.post('/person', function(req, res, next) {
+  router.post('/', function(req, res, next) {
     console.log(req.body);
     var body = Object.assign(req.body, {'name_tn':'ssdv'});
     Person.create(body, function (err, post) {
@@ -41,7 +41,7 @@ router.get('/person', (req, res, next) =>{
   });
   
   /* UPDATE PERSON */
-  router.put('/person/:id', function(req, res, next) {
+  router.put('/:id', function(req, res, next) {
     Person.findOneAndUpdate({'name_en':req.params.id}, req.body, function (err, post) {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
@@ -49,7 +49,7 @@ router.get('/person', (req, res, next) =>{
   });
   
   /* DELETE PERSON */
-  router.delete('/person', function(req, res, next) {
+  router.delete('/', function(req, res, next) {
     console.log(req);
     console.log(JSON.stringify(req.query));
     Person.findOneAndRemove(req.query, {"select":req.body}, function (err, post) {

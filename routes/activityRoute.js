@@ -5,7 +5,7 @@ const History = require('../db/models/historyModel');
 const dateFormat = require('dateformat');
 
 /* GET ALL activities */
-router.get('/activities', (req, res, next) => {
+router.get('/', (req, res, next) => {
   Activity.find({ 'delete_flag': false }, '_id person_name amount date information category type has_history', (err, activities) => {
     if (err) return next(err);
     res.json(activities);
@@ -13,7 +13,7 @@ router.get('/activities', (req, res, next) => {
 });
 
 /* GET SINGLE PERSON BY person */
-router.get('/activities/:person', (req, res, next) => {
+router.get('/:person', (req, res, next) => {
   Activity.find({ 'person_name': req.params.person, 'delete_flag': false }, function (err, activities) {
     if (err) return next(err);
     res.json(activities);
@@ -21,7 +21,7 @@ router.get('/activities/:person', (req, res, next) => {
 });
 
 /* GET ALL activities */
-router.get('/activities/:person/calc', (req, res, next) => {
+router.get('/:person/calc', (req, res, next) => {
   Activity.find((err, activities) => {
     if (err) return next(err);
     console.log(activities.length);
@@ -41,7 +41,7 @@ router.get('/activities/:person/calc', (req, res, next) => {
   });
 });
 
-router.get('/activities/monthView/:type', (req, res, next) => {
+router.get('/monthView/:type', (req, res, next) => {
   let today = new Date();
   let oneMonthBefore = getSpecifiedDate();
   // let oneMontBefore = today-30;
@@ -96,7 +96,7 @@ function getSpecifiedDate() {
 }
 
 /* SAVE Activities */
-router.post('/activities', function (req, res, next) {
+router.post('/', function (req, res, next) {
   Activity.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -104,7 +104,7 @@ router.post('/activities', function (req, res, next) {
 });
 
 /* UPDATE Activity */
-router.put('/activities/:name/:id', function (req, res, next) {
+router.put('/:name/:id', function (req, res, next) {
   Activity.findOneAndUpdate({ 'person_name': req.params.name, '_id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     // res.json({"status":"Successfully updated"});
@@ -133,7 +133,7 @@ router.put('/activities/:name/:id', function (req, res, next) {
 });
 
 /* Making delete flag enable hence it track of the records will be available */
-router.delete('/activities/:id', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
   Activity.findOneAndUpdate({ "_id": req.params.id, 'delete_flag': false }, { 'delete_flag': true }, function (err, post) {
     if (err) return next(err);
     res.json({ "status": "Successfully deleted" });

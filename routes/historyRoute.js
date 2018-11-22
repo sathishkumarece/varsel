@@ -5,7 +5,7 @@ const History = require('../db/models/historyModel');
 const dateFormat = require('dateformat');
 
 /* GET ALL HISTORY */
-router.get('/history', (req, res, next) =>{
+router.get('/', (req, res, next) =>{
     History.find( (err, history) => {
         console.log(history);
       if (err) return next(err);
@@ -14,7 +14,7 @@ router.get('/history', (req, res, next) =>{
   });
   
   /* GET SINGLE PERSON BY person */
-  router.get('/history/:id', (req, res, next) => {
+  router.get('/:id', (req, res, next) => {
     History.find({'activityId':req.params.id}, (err, history) => {
       if (err) return next(err);
       var msg = [];
@@ -35,7 +35,7 @@ router.get('/history', (req, res, next) =>{
   });
   
   /* Save History */
-  router.post('/history', (req, res, next) => {
+  router.post('/', (req, res, next) => {
     History.create(req.body, (err, post) => {
       if (err) return next(err);
       res.json(post);
@@ -43,7 +43,7 @@ router.get('/history', (req, res, next) =>{
   });
   
    /* Update history for particular activity id */
-   router.put('/history/:id', (req, res, next) => {
+   router.put('/:id', (req, res, next) => {
     History.update({'activityId':req.params.id}, {$push: {'history':{'changes':req.body}}}, (err, post) => {
       if (err) return next(err);
       res.json({"status":"Successfully updated"});
