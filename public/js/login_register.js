@@ -29,11 +29,19 @@ $("#form_login").submit(function (e) {
     let username = $("#username").val();
     console.log(username);
     $.ajax({
-        type: 'GET',
-        url: `/user/${username}`,
-        data: { 'password': 'Qwerty1!' },
+        // type: 'GET',
+        // url: `/user/${username}`,
+        // data: { 'password': 'Qwerty1!' },
+        type: 'POST',
+        url: '/user/login',
+        data: form_val,
         success: function (data) {
             console.log(data);
+            if(data == 'Access_denied'){
+
+            }else{
+                location.href = '/index.html';
+            }
         },
         error: function (error) {
             console.log(error.responseText);
@@ -50,10 +58,11 @@ $("#form_signup").submit(function (e) {
     let form_val = $("#form_signup").serialize();
     $.ajax({
         type: 'POST',
-        url: '/user',
+        url: '/user/register',
         data: form_val,
         success: function (data) {
             console.log(data);
+            location.href = '/';
         },
         error: function (error) {
             if(error.responseText.includes("userName_1 dup key")){

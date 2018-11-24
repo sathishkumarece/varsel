@@ -14,7 +14,8 @@ userRouter = require('./routes/userRoute');
 //Authentication package
 const session = require('express-session'),
 passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy;;
+LocalStrategy = require('passport-local').Strategy,
+User = require('./db/models/userModel');
 
 // Store session in DB
 const MongoStore = require('connect-mongo')(session);
@@ -79,7 +80,25 @@ app.use('/user', userRouter);
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
-      
+      console.log(username);
+      console.log(password);
+      User.findOne({ 'userName': username }, function (err, user) {
+        if (err) {done(err)};
+
+        if (user != null && user.length!= 0) {
+            user.comparePassword(password, function (err, isMatch) {
+                if (err) throw err;
+                console.log(password, isMatch); // -> Password123: true
+                if(isMatch){
+                    return done(null, {user_id: user._id});
+                }else{
+                    return done(null, false);
+                }
+            });
+        }else{
+            return done(null, false);
+        }
+    });
     }
   ));
 

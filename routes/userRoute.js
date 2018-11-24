@@ -6,19 +6,37 @@ const User = require('../db/models/userModel');
 const passport = require('passport');
 
 // Save the user information in the database
-router.post("/", function (req, res, next) {
+router.post("/register", function (req, res, next) {
     console.log(req.body);
     User.create(req.body, function (err, post) {
         if (err) return next(err);
         console.log(post);
         console.log(post['_id']);
-        req.login(post['_id'], (err)=>{
-             if(err) return next(err);
-             res.redirect('/');
+        req.login(post['_id'], (err) => {
+            if (err) return next(err);
+            res.redirect('/');
         });
         // res.json(post);
     });
 });
+
+//Get the user information from login page and validate it using passport
+// router.post('/login', function (req, res, next) {
+//     passport.authenticate('local', (err, user, info) => {
+//         if (err) { return next(err); }
+//         console.log('User: ' + user);
+//         if (user == false) {
+//             res.json('Access_denied');
+//         }else{
+//             res.json('Access_granted')
+//         }
+//     })(req, res, next);
+// });
+
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+}));
 
 //Fetch the user information and check whether password is matching or not
 router.get("/:name", function (req, res, next) {
@@ -37,11 +55,11 @@ router.get("/:name", function (req, res, next) {
     });
 });
 
-passport.serializeUser((user_id, done)=>{
+passport.serializeUser((user_id, done) => {
     done(null, user_id);
 });
 
-passport.deserializeUser((user_id, done)=>{
+passport.deserializeUser((user_id, done) => {
     done(null, user_id);
 });
 
