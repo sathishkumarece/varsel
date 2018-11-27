@@ -13,7 +13,8 @@ var ActivitiesSchema = new Schema({
     date: {type: Date, default: Date.now},
     update_date: {type: Date, default: Date.now},
     delete_flag: Boolean,
-    has_history: Boolean
+    has_history: Boolean,
+    user_id: Number
 },{collection: 'activities'});
 
 autoIncrement.initialize(mongoose.connection);

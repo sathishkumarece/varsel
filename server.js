@@ -72,39 +72,48 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Routing to specific router
-app.use('/person', authenticationMiddleware(), personRouter);
-app.use('/activities', authenticationMiddleware(), activityRouter);
-app.use('/history',  authenticationMiddleware(), historyRouter);
-app.use('/user', userRouter);
-
 passport.use(new LocalStrategy(
     function(username, password, done) {
-      console.log(username);
+        console.log(username);
       console.log(password);
       User.findOne({ 'userName': username }, function (err, user) {
-        if (err) {done(err)};
+          if (err) {done(err)};
 
-        if (user != null && user.length!= 0) {
-            user.comparePassword(password, function (err, isMatch) {
-                if (err) throw err;
-                console.log(password, isMatch); // -> Password123: true
-                if(isMatch){
-                    return done(null, {user_id: user._id});
-                }else{
-                    return done(null, false);
+          if (user != null && user.length!= 0) {
+              user.comparePassword(password, function (err, isMatch) {
+                  if (err) throw err;
+                  console.log(password, isMatch); // -> Password123: true
+                  if(isMatch){
+                      return done(null, {user_id: user._id});
+                    }else{
+                        return done(null, false);
                 }
             });
         }else{
             return done(null, false);
         }
     });
-    }
-  ));
+}
+));
+
+//Routing to specific router
+app.use('/person', authenticationMiddleware(), personRouter);
+app.use('/activities', authenticationMiddleware(), activityRouter);
+app.use('/history',  authenticationMiddleware(), historyRouter);
+app.use('/user', userRouter);
+
+//Handling Logout option
+app.get('/logout', (req, res)=>{
+    req.logout();
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid')
+        res.redirect('/')
+    });
+});
 
 // app.get('/', (req, res) =>{
-//     console.log(req.user);
-//     console.log(req.isAuthenticated());
+    //     console.log(req.user);
+    //     console.log(req.isAuthenticated());
 //     res.send('Success message + good news');
 // })
 // use static pages with express
