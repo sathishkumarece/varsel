@@ -15,7 +15,7 @@ var PersonSchema = new Schema({
     email: String,
     user_id: Number
 },{collection: 'person'});
-PersonSchema.index({ "name_en": 1, "user_id": 1}, { "unique": true });
+PersonSchema.index({name_en: 1, user_id: 1}, { unique: true });
 
 var PersonModel = mongoose.model('Person', PersonSchema);
 

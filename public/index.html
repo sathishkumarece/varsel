@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="http://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap-select/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="lib/mobirise/css/mbr-additional.css" type="text/css">
-    <link rel="stylesheet" href="./css/varsel.css">
+    <link rel="stylesheet" href="css/varsel.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 
 
 
-        <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+        <nav class="navbar navbar-expand navbar-dropdown filter-bar navbar-transparent align-items-center navbar-fixed-top navbar-toggleable-sm">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
@@ -46,45 +46,35 @@
             <div class="menu-logo">
                 <div class="navbar-brand">
                     <span class="navbar-logo">
-                        <a href="https://Varsel.com">
+                        <a href="/">
                             <img src="./images/image4146.png" alt="Varsel" style="height: 3.9rem;">
                         </a>
                     </span>
                     <span class="navbar-caption-wrap">
-                        <a class="navbar-caption text-white display-4" href="https://Varsel.com">VARSEL</a>
+                        <a class="navbar-caption text-white display-4" href="/">VARSEL</a>
                     </span>
                 </div>
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                <!-- <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                     <li class="nav-item dropdown">
-                        <a class="nav-link link text-white display-4" href="/index.html" aria-expanded="false">
+                        <a class="nav-link link text-white display-4" href="/html/home.html" aria-expanded="false">
                             <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
                             Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link text-white display-4" href="https://Varsel.com">
-                            <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                            About Us
-                        </a>
-                    </li>
-                </ul>
+                </ul> -->
                 <div class="navbar-buttons mbr-section-btn">
-                    <a class="btn btn-sm btn-primary display-4" href="./html/managePerson.html">
-                        <span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>
-                        Manage Users</a>
+                    <a class="btn btn-sm btn-primary display-4 " href="/html/login_register.html#toregister">
+                        Register</a>
                 </div>
                 <div class="navbar-buttons mbr-section-btn">
-                    <a class="btn btn-sm btn-primary display-4 " href="/logout">
-                        Logout</a>
+                    <a class="btn btn-sm btn-primary display-4 " href="/html/login_register.html#toLogin">
+                        Login</a>
                 </div>
             </div>
         </nav>
     </section>
 
-    <section class="engine">
-        <a href="https://mobiri.se/l">free website templates</a>
-    </section>
     <section class="cid-qYEN8y2HHa mbr-fullscreen mbr-parallax-background" id="header2-4">
 
 
@@ -97,362 +87,12 @@
 
                     <p class="mbr-text pb-3 mbr-fonts-style display-5">
                         Welcome to varsel application
-                        <br>Click on below button to enter expenses</p>
-                    <div class="mbr-section-btn">
-                        <a class="btn btn-md btn-secondary display-4" href="../html/enterExpense.html">
-                            <span class="mbri-cash mbr-iconfont mbr-iconfont-btn"></span>Enter Expenses</a>
-                    </div>
+                        <br>If new user, please register and play with it</p>
                 </div>
             </div>
-        </div>
-        <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
-            <a href="#next">
-                <i class="mbri-down mbr-iconfont"></i>
-            </a>
         </div>
     </section>
-    <section class="section-table cid-qYEPhczfBe" id="table1-5">
-        <div id="stripes" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
 
-        <div class="container container-table">
-            <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
-                Expenses
-            </h2>
-            <!-- <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
-            Click blue "Gear" icon in the top right corner to hide/show search and info, change the the table background and other parameters.  In browser click on the table head to sort the table, use search to filter the table.     
-      </h3> -->
-            <div class="table-wrapper">
-                <div class="container">
-                    <div class="row search">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-6">
-                            <div class="dataTables_filter">
-                                <label class="searchInfo mbr-fonts-style display-7">Search:</label>
-                                <input class="form-control input-sm" disabled="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row align-center">
-                    <div class="col-md-4">
-                        <button class="btn btn-primary btn-md advance_search_button" data-toggle="collapse" data-target="#form_advance_search">Advance Search</button>
-                    </div>
-                    <div class="col-md-4">
-                        <button id="edit_expense" class="btn btn-primary btn-md advance_search_button" data-toggle="modal" data-target="#editModal">Edit Expense</button>
-                    </div>
-                    <div class="col-md-4">
-                        <button id="delete_expense" class="btn btn-primary btn-md advance_search_button" data-toggle="modal" data-target="#deleteModal">Delete Expense</button>
-                    </div>
-                </div>
-                <div id="form_advance_search" class="border collapse form_advance_search">
-                    <!-- <form>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label>Minimum amount: </label>
-                                <input type="text" id="min" name="min">
-                                <label>Maximum amount: </label>
-                                <input type="text" id="max" name="max">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="col-1">
-                                    <label>Name: </label>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" id="filter_name" name="filter_name">
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Category: </label>
-                                    <input type="text" id="filter_category" name="filter_category">
-                                </div>
-                                <div class="col-md-4">
-                                    <label>Type: </label>
-                                    <input type="text" id="filter_type" name="filter_type">
-                                </div>
-                            </div>
-                        </div>
-                        <input type="button" class="btn btn-secondary" value="Advance search" id="search" name="search">
-                    </form> -->
-                    <form class="search_style">
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="filter_name">Name</label>
-                                <input type="text" class="form-control" id="filter_name">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="filter_category">Category</label>
-                                <select id="filter_category" class="form-control">
-                                    <option selected></option>
-                                    <option>Salary</option>
-                                    <option>Income</option>
-                                    <option>Food</option>
-                                    <option>Study</option>
-                                    <option>Shopping</option>
-                                    <option>Travel</option>
-                                    <option>Household</option>
-                                    <option>Doctor</option>
-                                    <option>Others</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="filter_type">Type</label>
-                                <select id="filter_type" class="form-control">
-                                    <option selected></option>
-                                    <option>Debit</option>
-                                    <option>Credit</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="filter_reason">Reason</label>
-                                <input type="text" class="form-control" id="filter_reason">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="filter_amt_min">Minimum Amount</label>
-                                <input type="text" class="form-control" id="filter_amt_min">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="filter_amt_max">Maximum Amount</label>
-                                <input type="text" class="form-control" id="filter_amt_max">
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary advance_search_button" id="search">Search</button>
-                        <button type="reset" class="btn btn-primary advance_search_button" id="search">Reset</button>
-                    </form>
-                </div>
-            </div>
-            <div class="container scroll">
-                <table id="activity_table" class="table isSearch table-responsive table-striped table-hover" cellspacing="0">
-                    <thead>
-                        <tr class="table-heads ">
-                            <th class="head-item mbr-fonts-style display-7">
-                                NAME</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                S.NO</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                AMOUNT</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                DATE</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                REASON</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                CATEGORY</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                TYPE</th>
-                            <th class="head-item mbr-fonts-style display-7">
-                                HISTORY</th>
-                        </tr>
-                    </thead>
-
-                    <!-- <tbody>
-              <td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">44</td><td class="body-item mbr-fonts-style display-7">2016-10-17</td><td class="body-item mbr-fonts-style display-7">$317.000</td></tr><tr>
-              <td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">35</td><td class="body-item mbr-fonts-style display-7">2013-04-12</td><td class="body-item mbr-fonts-style display-7">$445.500</td></tr><tr>
-              <td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">66</td><td class="body-item mbr-fonts-style display-7">2016-05-22</td><td class="body-item mbr-fonts-style display-7">$152.558</td></tr><tr>
-              <td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">70</td><td class="body-item mbr-fonts-style display-7">2016-05-15</td><td class="body-item mbr-fonts-style display-7">$459.146</td></tr>
-            </tbody> -->
-                </table>
-            </div>
-            <div class="container table-info-container">
-                <div class="row info">
-                    <div class="col-md-6">
-                        <div class="dataTables_info mbr-fonts-style display-7">
-                            <span class="infoBefore">Showing</span>
-                            <span class="inactive infoRows"></span>
-                            <span class="infoAfter">entries</span>
-                            <span class="infoFilteredBefore">(filtered from</span>
-                            <span class="inactive infoRows"></span>
-                            <span class="infoFilteredAfter"> total entries)</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Delete Modal HTML -->
-        <div id="deleteModal" class="modal fade">
-            <div class="modal-dialog modal-confirm">
-                <div class="modal-content">
-                    <div class="modal-header align-center">
-                        <div class="icon-box">
-                            <!-- <i class="material-icons">&#xE5CD;</i> -->
-                            <i class="fa fa-times animated rotateIn"></i>
-                        </div>
-                        <br>
-                        <h4 class="modal-title">Are you sure?</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Do you really want to delete these records? This process cannot be undone.</p>
-                    </div>
-                    <div class="modal-footer align-center">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                        <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of Delete Modal -->
-        <!-- Edit Modal HTML -->
-        <div id="editModal" class="modal fade">
-            <div class="modal-dialog modal-confirm">
-                <div class="modal-content">
-                    <div class="modal-header align-center">
-                        <h4 class="modal-title">Edit Expense</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="">
-                            <div class="form-group row">
-                                <label for="getName" class="col-sm-2 col-form-label">Whom:</label>
-                                <div class="col-sm-10">
-                                    <select id="getName" name="person_name" class="selectpicker show-tick form-control myNameClass" data-live-search="true">
-                                        <!-- <option selected>Bla</option> -->
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="amount" class="col-sm-2 col-form-label">Amount:</label>
-                                <div class="col-sm-10">
-                                    <input type="number" name="amount" step="any" class="form-control" id="amount" placeholder="Enter amount">
-                                </div>
-                            </div>
-                            <!-- Date picker form -->
-                            <div class="form-group row">
-                                <label for="datepicker" class="col-sm-2 col-form-label">Date:</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group date">
-                                        <!-- <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div> -->
-                                        <input type="text" name="date" class="form-control pull-right" id="datepicker" placeholder="Choose date" value="01/01/2017">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="reason" class="col-sm-2 col-form-label">Reason:</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" name="information" id="reason" placeholder="Enter reason..." rows="2"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="category" class="col-sm-2 col-form-label">Category:</label>
-                                <div class="col-sm-10">
-                                    <select id='category' name="category" class="selectpicker show-tick form-control myCategory" data-live-search="true">
-                                        <option selected>Salary</option>
-                                        <option>Food</option>
-                                        <option>Study</option>
-                                        <option>Shopping</option>
-                                        <option>Travel</option>
-                                        <option>Household</option>
-                                        <option>Doctor</option>
-                                        <option>Others</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row ml-auto">
-                                <label for="expenseType" class="col-form-label float-right">Debit</label>
-                                <!-- <div class="col-sm-2"> -->
-                                <label class="custom-toggle">
-                                    <input type="checkbox" class="form-control" id="expenseType" name="type" value="Credit">
-                                    <span class="custom-toggle-slider rounded-circle"></span>
-                                </label>
-                                <input id='testNameHidden' type='hidden' value='Debit' name='type'>
-                                <!-- </div> -->
-                                <label for="expenseType" class="col-form-label float-left">Credit</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" value="true" name="has_history">
-                                <input type="hidden" value="false" name="delete_flag">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- <div class="modal-footer align-center">
-                        <button id="delete_confirm" type="button" class="btn btn-danger">Delete</button>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-        <!-- End of Edit Modal -->
-        <!-- Edit Modal HTML -->
-        <div id="showHistory" class="modal fade">
-            <div class="modal-dialog modal-confirm modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header align-center">
-                        <h4 class="modal-title">History information</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="show_p">No history</p>
-                    </div>
-                    <div class="modal-footer align-center">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End of Edit Modal -->
-    </section>
-
-    <section>
-        <div class="row">
-            <!-- Simple Doughnut Chart -->
-            <div class="col-xl-6 col-lg-12">
-                <div class="card chart-card">
-                    <!-- <div class="card-header doughnut-card-header">
-                <h4 class="card-title">Doughnut Chart</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="fas fa-minus"></i></a></li>
-                    <li><a data-action="reload"><i class="fas fa-redo"></i></a></li>
-                    <li><a data-action="expand"><i class="fas fa-expand"></i></a></li>
-                    <li><a data-action="close"><i class="fas fa-times"></i></a></li>
-                  </ul>
-                </div>
-              </div> -->
-                    <div class="card-content collapse show">
-                        <div class="card-body">
-                            <div id="doughnut-debit" class="height-400 echart-container"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end of monthly view debit -->
-            <div class="col-xl-6 col-lg-12">
-                <div class="card chart-card">
-                    <!-- <div class="card-header doughnut-card-header">
-                <h4 class="card-title">Doughnut Chart</h4>
-                <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                <div class="heading-elements">
-                  <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="fas fa-minus"></i></a></li>
-                    <li><a data-action="reload"><i class="fas fa-redo"></i></a></li>
-                    <li><a data-action="expand"><i class="fas fa-expand"></i></a></li>
-                    <li><a data-action="close"><i class="fas fa-times"></i></a></li>
-                  </ul>
-                </div>
-              </div> -->
-                    <div class="card-content collapse show">
-                        <div class="card-body">
-                            <div id="doughnut-credit" class="height-400 echart-container"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end of monthly view - credit -->
-        </div>
-    </section>
     <section class="cid-qYEMurZg6I" id="footer1-3">
 
 
@@ -550,12 +190,6 @@
         </div>
     </section>
 
-    <div class="fixed-plugin">
-        <a href="html/enterExpense.html" aria-expanded="true">
-            <span class="mbri-cash mbr-iconfont mbr-iconfont-btn"></span>
-        </a>
-    </div>
-
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="lib/popper/popper.min.js"></script>
     <script src="lib/tether/tether.min.js"></script>
@@ -567,21 +201,10 @@
     <script src="lib/datatables/data-tables.bootstrap4.min.js"></script>
     <script src="lib/dropdown/js/script.min.js"></script>
     <script src="lib/theme/js/script.js"></script>
-    <script src="http://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
     <!-- JavaScript for bootstrap date picker -->
-    <script src="lib/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script src="lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script src="lib/echarts/js/echarts.js"></script>
-
-    <!-- <script src="js/person.js"></script> -->
-    <script src="js/doughnut-debit.js"></script>
-    <script src="js/doughnut-credit.js"></script>
-    <script src="js/namePicker.js"></script>
-    <script src="js/retrieveExpense.js"></script>
 </body>
 
 </html>

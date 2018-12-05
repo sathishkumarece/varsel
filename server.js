@@ -64,6 +64,9 @@ app.use(methodOverride());
 
 //To manage the session
 app.use(session({
+    cookie : {
+        maxAge: 1000* 60 * 60 *24 * 365
+    },
     secret: 'jhfjjlsgtqicgrtvwopsvzi',
     store: new MongoStore(options),
     resave: false,
@@ -82,7 +85,7 @@ passport.use(new LocalStrategy(
           if (user != null && user.length!= 0) {
               user.comparePassword(password, function (err, isMatch) {
                   if (err) throw err;
-                  console.log(password, isMatch); // -> Password123: true
+                  console.log(password, isMatch);
                   if(isMatch){
                       return done(null, {user_id: user._id});
                     }else{
