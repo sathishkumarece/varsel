@@ -4,7 +4,10 @@
   "description": "To maintain credit and debit",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "nodemon": "nodemon --inspect server.js",
+    "browsersync": "browser-sync start --proxy \"http://localhost:1516\" --files \"public/*.*\"",
+    "dev": "npm-run-all -p nodemon browsersync"
   },
   "keywords": [
     "varsel"
@@ -22,5 +25,10 @@
     "connect-mongo": "^2.0.2"
   },
   "author": "Sathishkumar NATARAJ",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.4",
+    "nodemon": "^1.18.11",
+    "npm-run-all": "^4.1.5"
+  }
 }
