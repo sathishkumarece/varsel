@@ -65,7 +65,8 @@ app.use(methodOverride());
 //To manage the session
 app.use(session({
     cookie : {
-        maxAge: 1000* 60 * 60 *24 * 365
+        maxAge: 1000* 60 * 60 *24 * 365,
+        secure: process.env.DATABASE_SERVICE_NAME ? true : false
     },
     secret: 'jhfjjlsgtqicgrtvwopsvzi',
     store: new MongoStore(options),
