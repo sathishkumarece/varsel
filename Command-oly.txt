@@ -111,6 +111,7 @@ server {
     location / {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-NginX-Proxy true;
         proxy_pass http://localhost:1516/;
         proxy_ssl_session_reuse off;
@@ -126,3 +127,21 @@ sudo systemctl start nginx
 cd varsel
 npm install
 DATABASE_SERVICE_NAME='mongodb' MONGODB_SERVICE_PORT='27017' MONGODB_PASSWORD='pass$Varsel' MONGODB_DATABASE='varseldb'  MONGODB_SERVICE_HOST='127.0.0.1' MONGODB_USER='varselUser' npm start
+
+
+
+For production setup
+
+sudo npm install -g pm2
+DATABASE_SERVICE_NAME='mongodb' MONGODB_SERVICE_PORT='27017' MONGODB_PASSWORD='pass$Varsel' MONGODB_DATABASE='varseldb'  MONGODB_SERVICE_HOST='127.0.0.1' MONGODB_USER='varselUser' pm2 start server.js
+
+
+***************************************************************************
+
+Check information in mongodb
+
+mongo -u varselUser -p 'pass$Varsel' --authenticationDatabase varseldb
+show collections
+
+mongodump -d database_name -o directory_to_store_dumps
+mongorestore -d database_name directory_backup_where_mongodb_tobe_restored
