@@ -76,7 +76,10 @@ if(process.env.DATABASE_SERVICE_NAME){
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
     sess.proxy = true
+    sess.cookie.domain = 'varsel.tk'
 }
+
+console.log(sess);
 
 //To manage the session
 app.use(session(sess));
