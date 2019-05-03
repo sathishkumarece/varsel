@@ -55,24 +55,31 @@ mongoose.connect(mongodb_connection_string, { useNewUrlParser: true })
     console.error(err);
 })
 
+app.set('trust proxy', true);
+
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-
-
-//To manage the session
-app.use(session({
+var sess = {
     cookie : {
-        maxAge: 1000* 60 * 60 *24 * 365,
-        secure: process.env.DATABASE_SERVICE_NAME ? true : false
+        maxAge: 1000* 60 * 60 *24 * 365
     },
     secret: 'jhfjjlsgtqicgrtvwopsvzi',
     store: new MongoStore(options),
     resave: false,
     saveUninitialized: false
-}));
+}
+
+if(process.env.DATABASE_SERVICE_NAME){
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+    sess.proxy = true
+}
+
+//To manage the session
+app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
 
