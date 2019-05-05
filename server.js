@@ -5,17 +5,17 @@ const mongoose = require('mongoose');
 const app = express();
 // import personRouter from './routes/person-route';
 const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-const methodOverride = require('method-override'); 
+const methodOverride = require('method-override');
 const personRouter = require('./routes/personRoute'),
-activityRouter = require('./routes/activityRoute'),
-historyRouter = require('./routes/historyRoute'),
-userRouter = require('./routes/userRoute');
+    activityRouter = require('./routes/activityRoute'),
+    historyRouter = require('./routes/historyRoute'),
+    userRouter = require('./routes/userRoute');
 
 //Authentication package
 const session = require('express-session'),
-passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy,
-User = require('./db/models/userModel');
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    User = require('./db/models/userModel');
 
 // Store session in DB
 const MongoStore = require('connect-mongo')(session);
@@ -40,7 +40,7 @@ if (process.env.DATABASE_SERVICE_NAME) {
     mongoDatabase = process.env[mongoServiceName + '_DATABASE'];
     mongoPassword = process.env[mongoServiceName + '_PASSWORD'];
     mongoUser = process.env[mongoServiceName + '_USER'];
-    mongodb_connection_string = 'mongodb://'+mongoUser+':'+mongoPassword+'@'+mongoHost+':'+mongoPort+'/' + mongoDatabase;
+    mongodb_connection_string = 'mongodb://' + mongoUser + ':' + mongoPassword + '@' + mongoHost + ':' + mongoPort + '/' + mongoDatabase;
 
     options = {
         url: mongodb_connection_string
@@ -50,21 +50,21 @@ if (process.env.DATABASE_SERVICE_NAME) {
 // console.log(mongodb_connection_string);
 // mongodb_connection_string = 'mongodb://userIEC:inPSs4qtkniWP2gv@172.30.37.78:27017/' + db_name;
 mongoose.connect(mongodb_connection_string, { useNewUrlParser: true })
-.then(()=> console.log('DB connection successful')
-).catch((err)=>{
-    console.error(err);
-})
+    .then(() => console.log('DB connection successful')
+    ).catch((err) => {
+        console.error(err);
+    })
 
 app.set('trust proxy', true);
 
-app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
 var sess = {
-    cookie : {
-        maxAge: 1000* 60 * 60 *24 * 365
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365
     },
     secret: 'jhfjjlsgtqicgrtvwopsvzi',
     store: new MongoStore(options),
@@ -72,14 +72,12 @@ var sess = {
     saveUninitialized: false
 }
 
-if(process.env.DATABASE_SERVICE_NAME){
+if (process.env.DATABASE_SERVICE_NAME) {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
     sess.proxy = true
     sess.cookie.domain = 'varsel.tk'
 }
-
-console.log(sess);
 
 //To manage the session
 app.use(session(sess));
@@ -87,37 +85,36 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
+    function (username, password, done) {
         console.log(username);
-      console.log(password);
-      User.findOne({ 'userName': username }, function (err, user) {
-          if (err) {done(err)};
-
-          if (user != null && user.length!= 0) {
-              user.comparePassword(password, function (err, isMatch) {
-                  if (err) throw err;
-                  console.log(password, isMatch);
-                  if(isMatch){
-                      return done(null, {user_id: user._id});
-                    }else{
+        console.log(password);
+        User.findOne({ 'userName': username }, function (err, user) {
+            if (err) { return done(err) };
+            if (user != null && user.length != 0) {
+                user.comparePassword(password, function (err, isMatch) {
+                    if (err) throw err;
+                    console.log(password, isMatch);
+                    if (isMatch) {
+                        return done(null, { user_id: user._id });
+                    } else {
                         return done(null, false);
-                }
-            });
-        }else{
-            return done(null, false);
-        }
-    });
-}
+                    }
+                });
+            } else {
+                return done(null, false);
+            }
+        });
+    }
 ));
 
 //Routing to specific router
 app.use('/person', authenticationMiddleware(), personRouter);
 app.use('/activities', authenticationMiddleware(), activityRouter);
-app.use('/history',  authenticationMiddleware(), historyRouter);
+app.use('/history', authenticationMiddleware(), historyRouter);
 app.use('/user', userRouter);
 
 //Handling Logout option
-app.get('/logout', (req, res)=>{
+app.get('/logout', (req, res) => {
     req.logout();
     req.session.destroy(() => {
         res.clearCookie('connect.sid')
@@ -125,27 +122,30 @@ app.get('/logout', (req, res)=>{
     });
 });
 
-// app.get('/', (req, res) =>{
-    //     console.log(req.user);
-    //     console.log(req.isAuthenticated());
-//     res.send('Success message + good news');
-// })
+app.get('/loginsuccess', (req, res) =>{
+    console.log(req.user);
+    console.log(req.isAuthenticated());
+    res.send('Successful login');
+})
+app.get('/loginfailed', (req, res) =>{
+    res.send('Access_denied');
+})
 // use static pages with express
 app.use(express.static('public'));
 
-function authenticationMiddleware(){
-    return(req, res, next) =>{
+function authenticationMiddleware() {
+    return (req, res, next) => {
         console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-        if(req.isAuthenticated()) return next();
+        if (req.isAuthenticated()) return next();
         res.json('Access_denied')
     }
 }
 
 var port = 1516;
-if(process.env.APPLICATION_SERVICE_PORT){
+if (process.env.APPLICATION_SERVICE_PORT) {
     port = process.env.APPLICATION_SERVICE_PORT;
 }
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log('Server started!!!');
-    
+
 });

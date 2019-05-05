@@ -5,6 +5,7 @@ $(document).ready(function(){
 var password = document.getElementById("passwordsignup")
   , confirm_password = document.getElementById("passwordsignup_confirm");
 
+//Check provided password and confirm password matches
 function validatePassword(){
   if(password.value != confirm_password.value) {
     confirm_password.setCustomValidity("Passwords Don't Match");
@@ -23,15 +24,13 @@ $('#emailsignup').on('keyup', function(){
     $('#error_message_email').hide();
 });
 
+//Login validation
 $("#form_login").submit(function (e) {
     let form_val = $("#form_login").serialize();
     console.log(form_val);
     let username = $("#username").val();
     console.log(username);
     $.ajax({
-        // type: 'GET',
-        // url: `/user/${username}`,
-        // data: { 'password': 'Qwerty1!' },
         type: 'POST',
         url: '/user/login',
         data: form_val,
@@ -40,7 +39,7 @@ $("#form_login").submit(function (e) {
             if(data == 'Access_denied'){
 
             }else{
-                location.href = '/index.html';
+                location.href = '/html/home.html';
             }
         },
         error: function (error) {
@@ -53,6 +52,7 @@ $("#form_login").submit(function (e) {
     });
 });
 
+//Register the user
 $("#form_signup").submit(function (e) {
     e.preventDefault();
     let form_val = $("#form_signup").serialize();
@@ -62,7 +62,7 @@ $("#form_signup").submit(function (e) {
         data: form_val,
         success: function (data) {
             console.log(data);
-            location.href = '/';
+            location.href = '/html/home.html';
         },
         error: function (error) {
             if(error.responseText.includes("userName_1 dup key")){

@@ -93,7 +93,7 @@ function userEdit(element) {
 
     // console.log($("#contentPanel").find(".text-muted"));
     // alert("User edit");
-    location.href = `/html/updatePerson.html?name=${name}&email=${content[2]}&address=${content[3]}&phone=${content[4]}`;
+    location.href = `/html/updatePerson.html?name=${name}&email=${content[1]}&address=${content[2]}&phone=${content[3]}`;
 };
 
 function userDelete(element) {

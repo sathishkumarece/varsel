@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "nodemon": "nodemon --inspect server.js",
-    "browsersync": "browser-sync start --proxy \"http://localhost:1516\" --files \"public/*.*\"",
+    "nodemon": "nodemon --ignore public/ --inspect server.js",
+    "browsersync": "browser-sync start --proxy \"http://localhost:1516\" --files \"public/**/*\"",
     "dev": "npm-run-all -p nodemon browsersync"
   },
   "keywords": [
