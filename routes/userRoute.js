@@ -21,24 +21,22 @@ router.post("/register", function (req, res, next) {
 });
 
 //Get the user information from login page and validate it using passport
-router.post('/login', function (req, res, next) {
-    console.log(req);
-    
-    passport.authenticate('local', (err, user, info) => {
-        if (err) { return next(err); }
-        console.log('User: ' + user);
-        if (user == false) {
-            res.json('Access_denied');
-        }else{
-            res.json('Access_granted')
-        }
-    })(req, res, next);
-});
+// router.post('/login', function (req, res, next) {
+//     passport.authenticate('local', (err, user, info) => {
+//         if (err) { return next(err); }
+//         console.log('User: ' + user);
+//         if (user == false) {
+//             res.json('Access_denied');
+//         }else{
+//             res.json('Access_granted')
+//         }
+//     })(req, res, next);
+// });
 
-// router.post('/login', passport.authenticate('local', {
-//     successRedirect: '/loginsuccess',
-//     failureRedirect: '/loginfailed'
-// }));
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/loginsuccess',
+    failureRedirect: '/loginfailed'
+}));
 
 // router.post('/login', function(req, res, next) {
 //     passport.authenticate('local', function(err, user, info) {

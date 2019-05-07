@@ -114,7 +114,7 @@ server {
 		proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-NginX-Proxy true;
         proxy_pass http://localhost:1516/;
-        proxy_ssl_session_reuse off;
+        proxy_ssl_session_reuse off; 	
         proxy_set_header Host $http_host;
         proxy_cache_bypass $http_upgrade;
         proxy_redirect off;
@@ -145,3 +145,5 @@ show collections
 
 mongodump -d database_name -o directory_to_store_dumps
 mongorestore -d database_name directory_backup_where_mongodb_tobe_restored
+
+git pull origin master
