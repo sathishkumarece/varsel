@@ -1,22 +1,26 @@
 // import express from 'express';
-const express = require('express');
-const router = express.Router();
+const express = require('express'),
+ router = express.Router(),
 // import Person from '../db/models/person-model'
-const User = require('../db/models/userModel');
-const passport = require('passport');
+ User = require('../db/models/userModel'),
+ passport = require('passport'),
+ crypto = require('crypto'),
+ mail = require('../service/mail');
 
 // Save the user information in the database
 router.post("/register", function (req, res, next) {
-    console.log(req.body);
-    User.create(req.body, function (err, post) {
+    let body = req.body;
+    body.token = crypto.randomBytes(20).toString('hex')
+    User.create(body, function (err, post) {
         if (err) return next(err);
         console.log(post);
         console.log(post['_id']);
-        req.login(post['_id'], (err) => {
-            if (err) return next(err);
-            res.redirect('/');
-        });
-        // res.json(post);
+        mail.emailVerification(req);
+        // req.login(post['_id'], (err) => {
+        //     if (err) return next(err);
+        //     res.redirect('/loginsuccess');
+        // });
+        res.send("Successfully registered");
     });
 });
 
@@ -48,6 +52,15 @@ router.post('/login', passport.authenticate('local', {
 //     })
 // })(req, res, next);
 // });
+
+//verify the user mail id
+router.get('/verify',(req, res, next)=>{
+    User.findOneAndUpdate({'email':req.query.email, 'token':req.query.token}, {'isVerified':true}, function (err, post) {
+        if (err) return next(err);
+        res.send('Account verified')
+      });
+});
+
 
 //Fetch the user information and check whether password is matching or not
 router.get("/:name", function (req, res, next) {

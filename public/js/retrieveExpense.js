@@ -9,7 +9,14 @@ $(document).ready(function () {
         ajax: {
             "type": 'GET',
             "url": "/activities",
-            "dataSrc": ""
+            "dataType": 'json',
+            "dataSrc": function (json) {
+               if(json == 'Access_denied'){
+                location.href='../index.html'
+               }else{
+                    return json;
+               }
+              }
         },
         destroy: true,
         select: true,
@@ -397,7 +404,7 @@ $.fn.dataTable.ext.search.push(
 /**
  * Update activities information
  */
-$("form").submit(function (e) {
+$("btn_update").click(function (e) {
     if (document.getElementById("expenseType").checked) {
         document.getElementById('testNameHidden').disabled = true;
     }
@@ -424,3 +431,9 @@ $("form").submit(function (e) {
         }
     });
 });
+
+$('#select-lang').on('change', ()=>{
+    let option = $('#select-lang').find(":selected").text(); 
+    if(option == 'தமிழ்') location.href = 'tm/home.html';
+    else if(option == 'ENGLISH') location.href = '../home.html'; 
+ });

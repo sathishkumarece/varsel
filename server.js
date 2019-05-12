@@ -64,7 +64,7 @@ app.use(methodOverride());
 
 var sess = {
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 365
+        maxAge: 3600000
     },
     secret: 'jhfjjlsgtqicgrtvwopsvzi',
     store: new MongoStore(options),
@@ -84,6 +84,8 @@ app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(isRememberMe())
+
 passport.use(new LocalStrategy(
     function (username, password, done) {
         console.log(username);
@@ -91,11 +93,12 @@ passport.use(new LocalStrategy(
         User.findOne({ 'userName': username }, function (err, user) {
             if (err) { return done(err) };
             if (user != null && user.length != 0) {
+                if(!user.isVerified) return done(null, false)
                 user.comparePassword(password, function (err, isMatch) {
                     if (err) throw err;
                     console.log(password, isMatch);
                     if (isMatch) {
-                        return done(null, { user_id: user._id });
+                        return done(null, { user_id: user._id, lang: user.lang });
                     } else {
                         return done(null, false);
                     }
@@ -107,11 +110,14 @@ passport.use(new LocalStrategy(
     }
 ));
 
+//check authenticated user
+app.use('/home', authenticationMiddleware());
+
 //Routing to specific router
 app.use('/person', authenticationMiddleware(), personRouter);
 app.use('/activities', authenticationMiddleware(), activityRouter);
 app.use('/history', authenticationMiddleware(), historyRouter);
-app.use('/user', userRouter);
+app.use('/user', isAuthenticated(), userRouter);
 
 //Handling Logout option
 app.get('/logout', (req, res) => {
@@ -125,7 +131,8 @@ app.get('/logout', (req, res) => {
 app.get('/loginsuccess', (req, res) =>{
     console.log(req.user);
     console.log(req.isAuthenticated());
-    res.send('Successful login');
+    let msg = `Successful login. Lang:${req.user.lang}`;
+    res.send(msg);
 })
 app.get('/loginfailed', (req, res) =>{
     res.send('Access_denied');
@@ -138,6 +145,23 @@ function authenticationMiddleware() {
         console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
         if (req.isAuthenticated()) return next();
         res.json('Access_denied')
+    }
+}
+
+function isAuthenticated() {
+    return (req, res, next) => {
+        if(req.path == '/verify') return next()
+        console.log(`is authenticated req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+        if (req.isAuthenticated()) res.json('Access granted');
+        else return next();
+    }
+}
+
+function isRememberMe() {
+    return (req, res, next) => {
+        if(req.body.loginkeeping)
+        req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
+       return next();
     }
 }
 

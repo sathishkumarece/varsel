@@ -973,3 +973,14 @@ th.head-item{
         display: none;
     }
 }
+
+#lang {
+	font-size: 15px;
+	background-color: #4a4b4b !important;
+}
+
+#select-lang{
+	background: #4a4b4b;
+	color: #fff;
+	border-color: #4a4b4b;
+}

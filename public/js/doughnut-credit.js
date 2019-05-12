@@ -9,14 +9,23 @@
 // ------------------------------
 
 var echartCredit;
+var language;
 $(document).ready(function () {
 
     // Set paths
     // ------------------------------
 
+    language = $('#select-lang').find(":selected").text(); 
+    var echartPath = '../../lib/echarts/js'
+    let type = 'Credit'
+    if(language == 'ENGLISH') {
+        echartPath = '../lib/echarts/js';
+    }else if(language == 'தமிழ்'){
+        type = 'வரவு';
+    }
     require.config({
         paths: {
-            echarts: '../lib/echarts/js'
+            echarts: echartPath
         }
     });
 
@@ -25,7 +34,7 @@ $(document).ready(function () {
 
 
     $.ajax({
-        url: "/activities/monthView/Credit",
+        url: `/activities/monthView/${type}`,
         type: "GET",
         async: false,
         success: function (credit_data) {
@@ -58,9 +67,28 @@ function echartCreditConfig(credit_data) {
             // ------------------------------
             echartCredit = ec.init(document.getElementById('doughnut-credit'));
 
+            let title_text = 'Monthly expense view'
+            let title_subtext = 'Debit'
+            let legend_data = ['Salary', 'Food', 'Study', 'Shopping', 'Travel', 'Household', 'Doctor', 'Others']
+            let title_pie = 'Switch to pies'
+            let title_funnel = 'Switch to funnel'
+            let title_restore = 'Restore'
+            let title_save = 'Same as image'
+            let title_nodata = 'No data'
+            if(language == 'தமிழ்'){
+                title_text = 'மாதாந்திர செலவின காட்சி'
+                title_subtext = 'வரவு'
+                legend_data = ['சம்பளம்', 'உணவு', 'படிப்பு', 'Shopping', 'பயணம்', 'வீட்டுடைமை', 'மருத்துவம்', 'மற்றவை']
+                title_pie = 'பையாக மாறுவதற்கு'
+                title_funnel = 'புனலாக மாறுவதற்கு'
+                title_restore = 'முன் நிலையில் வை'
+                title_save = 'படமாக சேமிக்க'
+                title_nodata = 'தகவல் இல்லை'
+            }
+
             if (credit_data.length === 0) {
                 echartCredit.showLoading({
-                    text: 'No data',    //loading text
+                    text: title_nodata,    //loading text
                 });
             } else {
 
@@ -74,8 +102,8 @@ function echartCreditConfig(credit_data) {
 
                     // Add title
                     title: {
-                        text: 'Monthly expense view',
-                        subtext: 'Credit',
+                        text: title_text,
+                        subtext: title_subtext,
                         x: 'center'
                     },
 
@@ -83,7 +111,7 @@ function echartCreditConfig(credit_data) {
                     legend: {
                         orient: 'vertical',
                         x: 'left',
-                        data: ['Salary', 'Food', 'Study', 'Shopping', 'Travel', 'Household', 'Doctor', 'Others']
+                        data: legend_data
                     },
 
                     tooltip : {         // Option config. Can be overwrited by series or data
@@ -145,8 +173,8 @@ function echartCreditConfig(credit_data) {
                             magicType: {
                                 show: true,
                                 title: {
-                                    pie: 'Switch to pies',
-                                    funnel: 'Switch to funnel',
+                                    pie: title_pie,
+                                    funnel: title_funnel,
                                 },
                                 type: ['pie', 'funnel'],
                                 option: {
@@ -162,11 +190,11 @@ function echartCreditConfig(credit_data) {
                             },
                             restore: {
                                 show: true,
-                                title: 'Restore'
+                                title: title_restore
                             },
                             saveAsImage: {
                                 show: true,
-                                title: 'Same as image',
+                                title: title_save,
                                 lang: ['Save']
                             }
                         }
@@ -194,7 +222,7 @@ function echartCreditConfig(credit_data) {
                                 emphasis: {
                                     label: {
                                         show: true,
-                                        formatter: '{b}' + '\n\n' + '{c}€ ({d}%)',
+                                        formatter: '{b}' + '\n\n' + '{c} ({d}%)',
                                         position: 'center',
                                         textStyle: {
                                             fontSize: '17',
@@ -208,7 +236,7 @@ function echartCreditConfig(credit_data) {
                                 trigger: 'item',
                                 // backgroundColor: 'black',
                                 position : 'center',
-                                formatter: '{b}' + '\n\n' + '{c}€ ({d}%)'
+                                formatter: '{b}' + '\n\n' + '{c} ({d}%)'
                             },
 
                             data: credit_data

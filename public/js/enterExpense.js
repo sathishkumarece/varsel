@@ -2,7 +2,7 @@
 
 $('#datepicker').datepicker("setDate", new Date());
 
-$("form").submit(function (e) {
+$("#btn_save").click(function (e) {
     // alert($("form").serializeArray());
     // e.preventDefault();
     if (document.getElementById("expenseType").checked) {
@@ -27,4 +27,10 @@ $("form").submit(function (e) {
             // showNotification('top','right');
         }
     });
+});
+
+$('#select-lang').on('change', ()=>{
+   let option = $('#select-lang').find(":selected").text(); 
+   if(option == 'தமிழ்') location.href = 'tm/enterExpense.html';
+   else if(option == 'ENGLISH') location.href = '../enterExpense.html'; 
 });

@@ -1,19 +1,18 @@
 $(document).ready(function(){
-    $("h1").css("color", "#0088ff");
     $.ajax({
         type: 'GET',
-        url:"/person"
+        url:"/user"
     }).done(function(data){
-        console.log(data);
-        var person = document.getElementById('person');
-        data.forEach(element => {
-            var spanText = document.createElement('span');
-            spanText.innerHTML = element.name_en;
-            person.appendChild(spanText);
-            person.appendChild(document.createElement('br'));
-        });
+        if(data == 'Access granted')
+        location.href = '/html/home.html'
     });
 });
  /*$(function(){
     $("h1").css("color", "#0088ff");
  });*/
+
+ $('#select-lang').on('change', ()=>{
+    let option = $('#select-lang').find(":selected").text(); 
+    if(option == 'தமிழ்') location.href = 'html/tm/index.html';
+    else if(option == 'ENGLISH') location.href = '../../index.html'; 
+ });

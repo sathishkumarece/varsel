@@ -9,14 +9,23 @@
 // ------------------------------
 
 var myChart;
+var language;
 $(document).ready(function () {
 
     // Set paths
     // ------------------------------
 
+    language = $('#select-lang').find(":selected").text(); 
+    var echartPath = '../../lib/echarts/js'
+    let type = 'Debit'
+    if(language == 'ENGLISH') {
+        echartPath = '../lib/echarts/js';
+    }else if(language == 'தமிழ்'){
+        type = 'பற்று';
+    }
     require.config({
         paths: {
-            echarts: '../lib/echarts/js'
+            echarts: echartPath
         }
     });
 
@@ -25,7 +34,7 @@ $(document).ready(function () {
 
 
     $.ajax({
-        url: "/activities/monthView/Debit",
+        url: `/activities/monthView/${type}`,
         type: "GET",
         async: false,
         success: function (debit_data) {
@@ -58,9 +67,29 @@ function echartDebitConfig(debit_data) {
             // ------------------------------
             myChart = ec.init(document.getElementById('doughnut-debit'));
 
+            let title_text = 'Monthly expense view'
+            let title_subtext = 'Debit'
+            let legend_data = ['Salary', 'Food', 'Study', 'Shopping', 'Travel', 'Household', 'Doctor', 'Others']
+            let title_switch = 'Switch to pies'
+            let title_funnel = 'Switch to funnel'
+            let title_restore = 'Restore'
+            let title_save = 'Same as image'
+            let save = 'Save'
+            let title_nodata = 'No data'
+            if(language == 'தமிழ்'){
+                title_text = 'மாதாந்திர செலவின காட்சி'
+                title_subtext = 'பற்று'
+                legend_data = ['சம்பளம்', 'உணவு', 'படிப்பு', 'Shopping', 'பயணம்', 'வீட்டுடைமை', 'மருத்துவம்', 'மற்றவை']
+                title_switch = 'பையாக மாறுவதற்கு'
+                title_funnel = 'புனலாக மாறுவதற்கு'
+                title_restore = 'முன் நிலையில் வை'
+                title_save = 'படமாக சேமிக்க'
+                save = 'சேமி'
+                title_nodata = 'தகவல் இல்லை'
+            }
             if (debit_data.length === 0) {
                 myChart.showLoading({
-                    text: 'No data',    //loading text
+                    text: title_nodata,    //loading text
                 });
             } else {
                 // Chart Options
@@ -69,8 +98,8 @@ function echartDebitConfig(debit_data) {
 
                     // Add title
                     title: {
-                        text: 'Monthly expense view',
-                        subtext: 'Debit',
+                        text: title_text,
+                        subtext: title_subtext,
                         x: 'center'
                     },
 
@@ -78,7 +107,7 @@ function echartDebitConfig(debit_data) {
                     legend: {
                         orient: 'vertical',
                         x: 'left',
-                        data: ['Salary', 'Food', 'Study', 'Shopping', 'Travel', 'Household', 'Doctor', 'Others']
+                        data: legend_data
                     },
 
                     tooltip : {         // Option config. Can be overwrited by series or data
@@ -139,8 +168,8 @@ function echartDebitConfig(debit_data) {
                             magicType: {
                                 show: true,
                                 title: {
-                                    pie: 'Switch to pies',
-                                    funnel: 'Switch to funnel',
+                                    pie: title_switch,
+                                    funnel: title_funnel,
                                 },
                                 type: ['pie', 'funnel'],
                                 option: {
@@ -156,12 +185,12 @@ function echartDebitConfig(debit_data) {
                             },
                             restore: {
                                 show: true,
-                                title: 'Restore'
+                                title: title_restore
                             },
                             saveAsImage: {
                                 show: true,
-                                title: 'Same as image',
-                                lang: ['Save']
+                                title: title_save,
+                                lang: [save]
                             }
                         }
                     },
@@ -188,7 +217,7 @@ function echartDebitConfig(debit_data) {
                                 emphasis: {
                                     label: {
                                         show: true,
-                                        formatter: '{b}' + '\n\n' + '{c}€ ({d}%)',
+                                        formatter: '{b}' + '\n\n' + '{c} ({d}%)',
                                         position: 'center',
                                         textStyle: {
                                             fontSize: '17',
@@ -201,7 +230,7 @@ function echartDebitConfig(debit_data) {
                                 trigger: 'item',
                                 // backgroundColor: 'black',
                                 position : 'center',
-                                formatter: '{b}' + '\n\n' + '{c}€ ({d}%)'
+                                formatter: '{b}' + '\n\n' + '{c} ({d}%)'
                             },
                             data: debit_data
                         }

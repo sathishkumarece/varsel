@@ -29,3 +29,9 @@ $("form").submit(function(){
         }
     });
 });
+
+$('#select-lang').on('change', ()=>{
+    let option = $('#select-lang').find(":selected").text(); 
+    if(option == 'தமிழ்') location.href = 'tm/updatePerson.html';
+    else if(option == 'ENGLISH') location.href = '../updatePerson.html'; 
+ });

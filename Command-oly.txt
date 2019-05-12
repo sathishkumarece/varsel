@@ -141,9 +141,12 @@ DATABASE_SERVICE_NAME='mongodb' MONGODB_SERVICE_PORT='27017' MONGODB_PASSWORD='p
 Check information in mongodb
 
 mongo -u varselUser -p 'pass$Varsel' --authenticationDatabase varseldb
+use varseldb
 show collections
 
 mongodump -d database_name -o directory_to_store_dumps
 mongorestore -d database_name directory_backup_where_mongodb_tobe_restored
+
+db.users.remove({}) --> delete all record from collection
 
 git pull origin master

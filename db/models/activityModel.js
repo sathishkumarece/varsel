@@ -6,7 +6,7 @@ Schema = mongoose.Schema;
 var ActivitiesSchema = new Schema({
     person_name: {type: String, index: true},
     amount: Number,
-    type: {type:String, enum: ["Credit", "Debit"]},
+    type: {type:String, enum: ["Credit", "Debit", "பற்று", "வரவு"]},
     category:{type:String},
     information: String,
     phone: String,

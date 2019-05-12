@@ -1,6 +1,6 @@
 {
   "name": "varsel",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "To maintain credit and debit",
   "main": "server.js",
   "scripts": {
@@ -22,7 +22,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "bcrypt": "^3.0.3",
-    "connect-mongo": "^2.0.2"
+    "connect-mongo": "^2.0.2",
+    "nodemailer": "^6.1.1"
   },
   "author": "Sathishkumar NATARAJ",
   "license": "MIT",

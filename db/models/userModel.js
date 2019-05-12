@@ -8,7 +8,11 @@ SALT_WORK_FACTOR = 10;
 var UsersSchema = new Schema({
     userName: {type: String, required: true, index: {unique: true}, lowercase: true},
     email: {type:String, required:true, unique:true, lowercase: true},
-    password: {type:String, required:true}
+    password: {type:String, required:true},
+    isVerified: {type:Boolean, default:false},
+    token: String,
+    lang: String,
+    currency: String
 },{collection: 'users'});
 
 autoIncrement.initialize(mongoose.connection);

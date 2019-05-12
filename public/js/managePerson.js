@@ -109,3 +109,9 @@ function userDelete(element) {
         alert("error");
     });
 }
+
+$('#select-lang').on('change', ()=>{
+    let option = $('#select-lang').find(":selected").text(); 
+    if(option == 'தமிழ்') location.href = 'tm/managePerson.html';
+    else if(option == 'ENGLISH') location.href = '../managePerson.html'; 
+ });
