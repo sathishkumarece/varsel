@@ -507,6 +507,22 @@ p.change_link{
 	-moz-border-radius: 5px;
 		 border-radius: 5px;
 }
+
+@media only screen and (max-width: 767px){
+	#wrapper{
+		width: 380px;
+	}
+
+	#register, 
+	#login{
+		margin:0px;
+	}
+
+	p.change_link{
+		width: 330px;
+		padding: 0px;
+	}
+}
 #register{	
 	z-index: 21;
 	opacity: 0;
@@ -586,8 +602,12 @@ box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 	background: transparent;
 }
 
-#error_message_username, #error_message_email{
+#error_message_username, #error_message_email, 
+#login_failed_username, #login_failed_password, #login_failed_verified,
+#no_username, #no_email, #no_password, #no_confirm_password
+{
 	color: crimson;
+	text-align: center;
 }
 
 /*

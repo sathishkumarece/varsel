@@ -148,5 +148,9 @@ mongodump -d database_name -o directory_to_store_dumps
 mongorestore -d database_name directory_backup_where_mongodb_tobe_restored
 
 db.users.remove({}) --> delete all record from collection
+db.sessions.remove({})
+db.users.update({_id:1000},{$set:{"userName":"சதீஷ்குமார்"}})
+
+
 
 git pull origin master

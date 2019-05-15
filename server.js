@@ -93,18 +93,18 @@ passport.use(new LocalStrategy(
         User.findOne({ 'userName': username }, function (err, user) {
             if (err) { return done(err) };
             if (user != null && user.length != 0) {
-                if(!user.isVerified) return done(null, false)
+                if(!user.isVerified) return done(null, false, { message: 'Account not verified' })
                 user.comparePassword(password, function (err, isMatch) {
                     if (err) throw err;
                     console.log(password, isMatch);
                     if (isMatch) {
                         return done(null, { user_id: user._id, lang: user.lang });
                     } else {
-                        return done(null, false);
+                        return done(null, false, { message: 'Incorrect password' });
                     }
                 });
             } else {
-                return done(null, false);
+                return done(null, false, {message:'No user found'});
             }
         });
     }
@@ -135,7 +135,7 @@ app.get('/loginsuccess', (req, res) =>{
     res.send(msg);
 })
 app.get('/loginfailed', (req, res) =>{
-    res.send('Access_denied');
+    res.send(`Access_denied Message:${req.session.messages[(req.session.messages.length)-1]}`);
 })
 // use static pages with express
 app.use(express.static('public'));

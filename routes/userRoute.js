@@ -39,17 +39,14 @@ router.post("/register", function (req, res, next) {
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/loginsuccess',
-    failureRedirect: '/loginfailed'
+    failureRedirect: '/loginfailed', failureMessage: true
 }));
 
 // router.post('/login', function(req, res, next) {
 //     passport.authenticate('local', function(err, user, info) {
 //     if (err) { return next(err); }
-//     if (!user) { return res.redirect('/loginfailed'); }
-//     req.logIn(user, function(err) {
-//       if (err) { return next(err); }
-//       return res.redirect('/loginsuccess');
-//     })
+//     if (!user) { return res.send(`Access_denied. Message:${info.message}`); }
+//     res.send(`Successful login. Lang:${user.lang}`);
 // })(req, res, next);
 // });
 

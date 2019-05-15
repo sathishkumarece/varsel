@@ -77,13 +77,16 @@
                     <div id="login" class="animate form">
                         <form id="form_login">
                             <h1>புகுபதிகை</h1>
+                            <div id="login_failed_verified">கணக்கு இன்னும் சரிபார்க்கப்படவில்லை!</div>
                             <div class="form-group">
                                 <label for="username" class="uname">உங்கள் பயனர் பெயர் அல்லது  மின்னஞ்சல்</label>
                                 <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+                                <div id="login_failed_username">தவறான பயனர் பெயர்!</div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="youpasswd">தங்களது கடவுச்சொல்</label>
                                 <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <div id="login_failed_password">கடவுச்சொல் பொருந்தவில்லை!</div>
                             </div>
                             <div class="form-group keeplogin">
                                 <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
@@ -106,20 +109,23 @@
                                 <label for="usernamesignup" class="uname">உங்கள் பயனர் பெயர்</label>
                                 <input id="usernamesignup" name="userName" required="required" type="text" placeholder="varsel123" />
                                 <div id="error_message_username">பயனர் பெயர் ஏற்கனவே உள்ளது!</div>
+                                <div id="no_username">பயனர்பெயர் தேவை</div>
                             </div>
                             <div class="form-group">
                                 <label for="emailsignup" class="youmail">உங்கள் மின்னஞ்சல்</label>
                                 <input id="emailsignup" name="email" required="required" type="email" placeholder="varsel_contact@mail.com" />
                                 <div id="error_message_email">மின்னஞ்சல் ஏற்கனவே உள்ளது!</div>
+                                <div id="no_email">மின்னஞ்சல் தேவைப்படுகிறது அல்லது தவறான மின்னஞ்சல் வடிவம்</div>
                             </div>
                             <div class="form-group">
                                 <label for="passwordsignup" class="youpasswd">தங்களது கடவுச்சொல்</label>
                                 <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <div id="no_password">கடவுச்சொல் தேவை</div>
                             </div>
                             <div class="form-group">
                                 <label for="passwordsignup_confirm" class="youpasswd">உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்</label>
-                                <input id="passwordsignup_confirm" name="password_confirm" required="required" type="password" placeholder="eg. X8df!90EO"
-                                />
+                                <input id="passwordsignup_confirm" name="password_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <div id="no_confirm_password">கடவுச்சொற்கள் பொருந்தவில்லை</div>
                             </div>
                             <div class="form-group">
                                 <label for="languagesignup" class="lang_signup">விருப்பமான மொழி</label>

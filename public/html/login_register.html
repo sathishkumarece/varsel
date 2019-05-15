@@ -76,13 +76,16 @@
                     <div id="login" class="animate form">
                         <form id="form_login">
                             <h1>Log in</h1>
+                            <div id="login_failed_verified">Account is not yet verified!</div>
                             <div class="form-group">
                                 <label for="username" class="uname"> Your email or username </label>
                                 <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+                                <div id="login_failed_username">Invalid username!</div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="youpasswd"> Your password </label>
                                 <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <div id="login_failed_password">Password doesn't match!</div>
                             </div>
                             <div class="form-group keeplogin">
                                 <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
@@ -105,20 +108,23 @@
                                 <label for="usernamesignup" class="uname">Your username</label>
                                 <input id="usernamesignup" name="userName" required="required" type="text" placeholder="varsel123" />
                                 <div id="error_message_username">Person already exist!</div>
+                                <div id="no_username">Username is required</div>
                             </div>
                             <div class="form-group">
                                 <label for="emailsignup" class="youmail">Your email</label>
                                 <input id="emailsignup" name="email" required="required" type="email" placeholder="varsel_contact@mail.com" />
                                 <div id="error_message_email">Email already exist!</div>
+                                <div id="no_email">Email is required or email format is not good</div>
                             </div>
                             <div class="form-group">
                                 <label for="passwordsignup" class="youpasswd">Your password</label>
                                 <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <div id="no_password">Password is required</div>
                             </div>
                             <div class="form-group">
                                 <label for="passwordsignup_confirm" class="youpasswd">Please confirm your password</label>
-                                <input id="passwordsignup_confirm" name="password_confirm" required="required" type="password" placeholder="eg. X8df!90EO"
-                                />
+                                <input id="passwordsignup_confirm" name="password_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                <div id="no_confirm_password">Passwords didn't Match</div>
                             </div>
                             <div class="form-group">
                                 <label for="languagesignup" class="lang_signup">Preferred Language</label>
