@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Activity = require('../db/models/activityModel');
-const History = require('../db/models/historyModel');
-const dateFormat = require('dateformat');
+const express = require('express'),
+ router = express.Router(),
+ Activity = require('../db/models/activityModel'),
+ History = require('../db/models/historyModel'),
+ dateFormat = require('dateformat'),
+ util = require('../service/util');
 
 /* GET ALL activities */
 router.get('/', (req, res, next) => {
@@ -46,7 +47,7 @@ router.get('/:person/calc', (req, res, next) => {
 router.get('/monthView/:type', (req, res, next) => {
   let user_id = req.session.passport.user.user_id;
   let today = new Date();
-  let oneMonthBefore = getSpecifiedDate();
+  let oneMonthBefore = util.getSpecifiedDate();
   // let oneMontBefore = today-30;
   Activity.aggregate(([
     {
@@ -87,18 +88,6 @@ router.get('/monthView/:type', (req, res, next) => {
     res.json(response);
   });
 });
-
-function getSpecifiedDate() {
-  let today = new Date();
-  let month, year, date;
-  year = today.getFullYear();
-  month = today.getMonth();
-  date = today.getDate();
-  if ((month - 1) <= 0)
-    year = today.getFullYear() - 1;
-  var backdate = new Date(year, month - 1, date);
-  return backdate;
-}
 
 /* SAVE Activities */
 router.post('/', function (req, res, next) {

@@ -150,10 +150,13 @@ function authenticationMiddleware() {
 
 function isAuthenticated() {
     return (req, res, next) => {
-        if(req.path == '/verify') return next()
         console.log(`is authenticated req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-        if (req.isAuthenticated()) res.json('Access granted');
-        else return next();
+        if(req.path == '/login' || req.path == '/register'){
+            if (req.isAuthenticated()) res.json(`Access granted. Lang:${req.session.passport.user.lang}`);
+            else return next();
+        }else{
+            return next();
+        }
     }
 }
 

@@ -12,6 +12,12 @@ var UsersSchema = new Schema({
     isVerified: {type:Boolean, default:false},
     token: String,
     lang: String,
+    firstName: String,
+    lastName: String,
+    address: String,
+    city: String,
+    country: String,
+    pincode: Number,
     currency: String
 },{collection: 'users'});
 

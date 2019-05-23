@@ -984,3 +984,8 @@ th.head-item{
 	color: #fff;
 	border-color: #4a4b4b;
 }
+
+/** Style for profile icon**/
+.profile{
+    color: floralwhite
+}

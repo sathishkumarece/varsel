@@ -60,7 +60,6 @@ a{
 	height: 100%;
 	position: relative;
 	text-align: center;
-
 }
 
 .engineExpense{
@@ -219,6 +218,46 @@ a.hiddenanchor{
 	margin: 0px auto;	
 	width: 500px;
 	position: relative;	
+}
+
+#wrapper_profile{
+	right: 0px;
+	/* min-height: 560px;	 */
+	margin: 0px auto;	
+	position: relative;	
+}
+
+@media (min-width: 1200px){
+	#wrapper_profile {
+    max-width: 1140px;
+}
+}
+@media (min-width: 992px){
+	#wrapper_profile {
+    max-width: 960px;
+}
+}
+@media (min-width: 768px){
+	#wrapper_profile {
+    max-width: 720px;
+}
+}
+/* @media (min-width: 576px){
+	#wrapper_profile {
+    max-width: 540px;
+}
+} */
+
+#container_profile{
+	/* background-image: linear-gradient(to bottom right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)); */
+	/* background-image: linear-gradient(to bottom right, rgba(0,0,255,0.5), rgba(255,192,205)); */
+	background-image: linear-gradient(to bottom right, rgba(56, 56, 56, 0.9),
+	 rgba(41, 18, 18, 0.2), rgba(56, 56, 56, 0.9));
+	padding: 10px;
+	margin: 10px;
+	text-align: left;
+	color: #fff;
+	border-radius: 10px;
 }
 /**** Styling the form elements **/
 

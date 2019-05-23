@@ -84,10 +84,11 @@ $(document).ready(function(){
            data: form_val,
            async: false,
            success: function(data){
-               setTimeout(function(){
-                   console.log(data);
-                }, 2000);
-                showNotification('top','right', 'User saved successful!', 'success');
+                let message = 'User saved successful'
+                if(data.includes('Lang:தமிழ்')){
+                    message = 'பயனர் சேமிக்கப்பட்டது'
+                }
+                showNotification('top','right', message, 'success');
             },
             error: function(e){
                 console.log(e);
@@ -106,21 +107,3 @@ $(document).ready(function(){
     
 });
 
-function showNotification(from, align, message, type) {
-    // type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
-
-    // color = Math.floor((Math.random() * 6) + 1);
-
-    $.notify({
-      icon: "fas fa-check",
-      message: message
-
-    }, {
-      type: type,
-      timer: 2000,
-      placement: {
-        from: from,
-        align: align
-      }
-    });
-  }

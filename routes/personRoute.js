@@ -37,11 +37,10 @@ router.get('/', (req, res, next) =>{
   router.post('/', function(req, res, next) {
     console.log(req.body);
     let user_id = req.session.passport.user.user_id;
-    var body = Object.assign(req.body, {'name_tn':'ssdv', "user_id":user_id});
+    var body = Object.assign(req.body, {"user_id":user_id});
     Person.create(body, function (err, post) {
       if (err) return next(err);
-      console.log(post);
-      res.json(post);
+      res.send(`Save success. Lang:${req.session.passport.user.lang}`);
     });
   });
   

@@ -58,6 +58,22 @@ router.get('/verify',(req, res, next)=>{
       });
 });
 
+//Get the complete information about the user
+router.get('/getProfile', (req, res, next)=>{
+    User.findOne({'_id':req.session.passport.user.user_id}, 'userName email firstName lastName address city country pincode lang', (err, result)=>{
+        if(err) return next(err)
+        else res.json(result)
+    });
+})
+
+//Update the user information with new data
+router.put('/updateProfile', (req, res, next)=>{
+    req.session.passport.user.lang = req.body.lang
+    User.findOneAndUpdate({'_id':req.session.passport.user.user_id}, req.body, (err, result)=>{
+        if(err) return next(err)
+        res.send(`Update success. Lang:${req.session.passport.user.lang}`)
+    })
+})
 
 //Fetch the user information and check whether password is matching or not
 router.get("/:name", function (req, res, next) {
