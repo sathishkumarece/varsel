@@ -35,7 +35,14 @@ $('#updateProfile').click(function(){
                     message = 'பயனர் சுயவிவரம் சேமிக்கப்பட்டது'
                 }
                 showNotification('top','right', message, 'success');
+
             }
         }
     });
 })
+
+$('#select-lang').on('change', ()=>{
+    let option = $('#select-lang').find(":selected").text(); 
+    if(option == 'தமிழ்') location.href = 'tm/profile.html';
+    else if(option == 'ENGLISH') location.href = '../profile.html'; 
+ });

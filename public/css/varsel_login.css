@@ -251,8 +251,8 @@ a.hiddenanchor{
 #container_profile{
 	/* background-image: linear-gradient(to bottom right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)); */
 	/* background-image: linear-gradient(to bottom right, rgba(0,0,255,0.5), rgba(255,192,205)); */
-	background-image: linear-gradient(to bottom right, rgba(56, 56, 56, 0.9),
-	 rgba(41, 18, 18, 0.2), rgba(56, 56, 56, 0.9));
+	background-image: linear-gradient(to bottom right, rgba(39, 39, 39, 0.9),
+	 rgba(41, 18, 18, 0.4), rgba(39, 39, 39, 0.9));
 	padding: 10px;
 	margin: 10px;
 	text-align: left;
