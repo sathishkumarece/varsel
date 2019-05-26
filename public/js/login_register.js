@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('#login_failed_username').hide();
     $('#login_failed_password').hide();
     $('#login_failed_verified').hide();
+    $('#login_failed_missing_cred').hide()
     $('#no_username').hide();
     $('#no_email').hide();
     $('#no_password').hide();
@@ -39,6 +40,7 @@ $('#username, #password').on('keyup', function () {
     $('#login_failed_username').hide();
     $('#login_failed_password').hide();
     $('#login_failed_verified').hide();
+    $('#login_failed_missing_cred').hide()
 });
 $('#passwordsignup').on('keyup', function () {
     $('#no_password').hide();
@@ -60,6 +62,7 @@ $("#login_btn").click(function (e) {
                 if(data.includes('Message:No user found')) $('#login_failed_username').show();
                 if(data.includes('Message:Incorrect password')) $('#login_failed_password').show();
                 if(data.includes('Message:Account not verified')) $('#login_failed_verified').show();
+                if(data.includes('Message:Missing credentials')) $('#login_failed_missing_cred').show();
             } else {
                 if (data.includes('Lang:ENGLISH')) {
                     location.href = '/html/home.html';

@@ -53,6 +53,24 @@ UsersSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
+UsersSchema.methods.updatePassword = function(password){
+    //  // generate a salt
+    //  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    //     if (err) return err;
+
+    //     // hash the password using our new salt
+    //     bcrypt.hash(password, salt, function(err, hash) {
+    //         if (err) return err;
+
+    //         // override the cleartext password with the hashed one
+    //         return hash;
+    //     });
+    // });
+
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(SALT_WORK_FACTOR));
+}
+
 var UsersModel = mongoose.model('Users', UsersSchema);
+
 
 module.exports = UsersModel;

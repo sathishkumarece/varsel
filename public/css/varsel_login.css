@@ -259,6 +259,17 @@ a.hiddenanchor{
 	color: #fff;
 	border-radius: 10px;
 }
+
+/* style edit icon */
+#edit_pass{
+	color: #4a4b4b;
+	position: relative;
+	font-size: 25px;
+	padding-top:10px;
+	margin-left: -27px;
+	cursor: pointer;
+}
+
 /**** Styling the form elements **/
 
 /**** general text styling ****/
@@ -643,7 +654,8 @@ box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 
 #error_message_username, #error_message_email, 
 #login_failed_username, #login_failed_password, #login_failed_verified,
-#no_username, #no_email, #no_password, #no_confirm_password
+#no_username, #no_email, #no_password, #no_confirm_password, 
+#login_failed_missing_cred
 {
 	color: crimson;
 	text-align: center;

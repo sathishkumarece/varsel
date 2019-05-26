@@ -9,7 +9,6 @@ var PersonSchema = new Schema({
         type: String,
         required: [true, 'Why no name?']
     },
-    name_tn: String,
     address: String,
     phone: String,
     email: String,

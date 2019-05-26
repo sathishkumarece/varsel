@@ -69,6 +69,8 @@ router.get('/getProfile', (req, res, next)=>{
 //Update the user information with new data
 router.put('/updateProfile', (req, res, next)=>{
     req.session.passport.user.lang = req.body.lang
+    //If password is available, update with bcrypt
+    if(req.body.password) req.body.password = new User().updatePassword(req.body.password)
     User.findOneAndUpdate({'_id':req.session.passport.user.user_id}, req.body, (err, result)=>{
         if(err) return next(err)
         res.send(`Update success. Lang:${req.session.passport.user.lang}`)

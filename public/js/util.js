@@ -3,8 +3,12 @@ function showNotification(from, align, message, type) {
 
     // color = Math.floor((Math.random() * 6) + 1);
 
+    let imageLoc = "../images/success.png";
+    let option = $('#select-lang').find(":selected").text();
+    if(option == 'தமிழ்') imageLoc = "../../images/success.png"
+
     $.notify({
-      icon: "../images/success.png",
+      icon: imageLoc,
       message: message
     }, {
         icon_type: 'image',

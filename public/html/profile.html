@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="../lib/mobirise/css/mbr-additional.css" type="text/css">
     <link rel="stylesheet" href="../lib/web/assets/mobirise-icons/mobirise-icons.css">
     <link rel="stylesheet" href="../lib/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
     <link rel="stylesheet" href="../css/varsel.css">
     <link rel="stylesheet" href="../css/varsel_login.css">
 </head>
@@ -83,7 +84,7 @@
             <div id="container_profile">
                 <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                 <div id="wrapper_profile">
-                    <form id="profile_form">
+                    <form id="form_profile">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -101,6 +102,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="password" class="bmd-label-floating">Password</label>
+                                    <div class="input-group">
+                                        <input id="password" name="password" required="required" type="password" class="form-control" disabled/>
+                                        <span id="edit_pass">
+                                            <i class="far fa-edit 2x"></i>
+                                        </span>
+                                    </div>
+                                    <div id="no_password">Password is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="confirm_pass">
+                                    <label for="password_confirm" class="bmd-label-floating">Confirm your password</label>
+                                    <input id="password_confirm" name="password_confirm" required="required" type="password" class="form-control" />
+                                    <div id="no_confirm_password">Passwords didn't Match</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="bmd-label-floating">First Name</label>
                                     <input type="text" name="firstName" id="firstName" class="form-control">
                                 </div>
@@ -108,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Last Name</label>
-                                    <input type="text" name="lastName"  id="lastName" class="form-control">
+                                    <input type="text" name="lastName" id="lastName" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -151,10 +173,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                    <div class="form-group">
-                                            <label class="bmd-label-floating">Currency</label>
-                                            <input type="text" name="currency" id="currency" placeholder="Future implementation" class="form-control" disabled>
-                                        </div>
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Currency</label>
+                                    <input type="text" name="currency" id="currency" placeholder="Future implementation" class="form-control" disabled>
+                                </div>
                             </div>
                         </div>
                         <button type="button" id="updateProfile" class="btn btn-primary pull-right">Update Profile</button>
