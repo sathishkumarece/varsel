@@ -87,10 +87,9 @@ app.use(passport.session());
 app.use(isRememberMe())
 
 passport.use(new LocalStrategy(
-    function (username, password, done) {
-        console.log(username);
-        console.log(password);
-        User.findOne({ 'userName': username }, function (err, user) {
+    function (nameOrMail, password, done) {
+        console.log(nameOrMail);
+        User.findOne({ $or :[ {'userName': nameOrMail }, {'email':nameOrMail} ]}, function (err, user) {
             if (err) { return done(err) };
             if (user != null && user.length != 0) {
                 if(!user.isVerified) return done(null, false, { message: 'Account not verified' })
