@@ -76,7 +76,7 @@ if (process.env.DATABASE_SERVICE_NAME) {
     app.set('trust proxy', 1) // trust first proxy
     sess.cookie.secure = true // serve secure cookies
     sess.proxy = true
-    sess.cookie.domain = 'varsel.tk'
+    sess.cookie.domain = 'varsel.co.in'
 }
 
 //To manage the session
@@ -89,10 +89,10 @@ app.use(isRememberMe())
 passport.use(new LocalStrategy(
     function (nameOrMail, password, done) {
         console.log(nameOrMail);
-        User.findOne({ $or :[ {'userName': nameOrMail }, {'email':nameOrMail} ]}, function (err, user) {
+        User.findOne({ $or: [{ 'userName': nameOrMail }, { 'email': nameOrMail }] }, function (err, user) {
             if (err) { return done(err) };
             if (user != null && user.length != 0) {
-                if(!user.isVerified) return done(null, false, { message: 'Account not verified' })
+                if (!user.isVerified) return done(null, false, { message: 'Account not verified' })
                 user.comparePassword(password, function (err, isMatch) {
                     if (err) throw err;
                     console.log(password, isMatch);
@@ -103,7 +103,7 @@ passport.use(new LocalStrategy(
                     }
                 });
             } else {
-                return done(null, false, {message:'No user found'});
+                return done(null, false, { message: 'No user found' });
             }
         });
     }
@@ -127,14 +127,14 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/loginsuccess', (req, res) =>{
+app.get('/loginsuccess', (req, res) => {
     console.log(req.user);
     console.log(req.isAuthenticated());
     let msg = `Successful login. Lang:${req.user.lang}`;
     res.send(msg);
 })
-app.get('/loginfailed', (req, res) =>{
-    res.send(`Access_denied Message:${req.session.messages[(req.session.messages.length)-1]}`);
+app.get('/loginfailed', (req, res) => {
+    res.send(`Access_denied Message:${req.session.messages[(req.session.messages.length) - 1]}`);
 })
 // use static pages with express
 app.use(express.static('public'));
@@ -150,10 +150,10 @@ function authenticationMiddleware() {
 function isAuthenticated() {
     return (req, res, next) => {
         console.log(`is authenticated req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-        if(req.path == '/login' || req.path == '/register'){
+        if (req.path == '/login' || req.path == '/register') {
             if (req.isAuthenticated()) res.json(`Access granted. Lang:${req.session.passport.user.lang}`);
             else return next();
-        }else{
+        } else {
             return next();
         }
     }
@@ -161,9 +161,9 @@ function isAuthenticated() {
 
 function isRememberMe() {
     return (req, res, next) => {
-        if(req.body.loginkeeping)
-        req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
-       return next();
+        if (req.body.loginkeeping)
+            req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
+        return next();
     }
 }
 
