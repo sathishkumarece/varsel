@@ -7,13 +7,13 @@ let transporter = nodeMailer.createTransport({
     secure: true,
     auth: {
         user: 'varsel.contact@gmail.com',
-        pass: '&qAz7mLp8*'
+        pass: 'jK*90nVv%7P'
     }
 });
 
 module.exports = {
     emailVerification: (req) => {
-        
+
         let url = `${req.protocol}://${req.headers.host}/html/accountVerify.html?email=${req.body.email}&token=${req.body.token}`
         let subject = 'Varsel - Email Verification';
         let html = `<html>
@@ -27,7 +27,7 @@ module.exports = {
         </td></tr></tbody></table>
         </body>
         </html>`
-        if(req.body.lang == 'தமிழ்'){
+        if (req.body.lang == 'தமிழ்') {
             url = `${req.protocol}://${req.headers.host}/html/tm/accountVerify.html?email=${req.body.email}&token=${req.body.token}`
             subject = 'வர்செல் - மின்னஞ்சல் சரிபார்ப்பு';
             html = `<html>
