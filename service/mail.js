@@ -6,8 +6,11 @@ let transporter = nodeMailer.createTransport({
     port: 465,
     secure: true,
     auth: {
+        type: 'oauth2',
         user: 'varsel.contact@gmail.com',
-        pass: 'jK*90nVv%7P'
+        clientId: '818087180658-apnsia515t2jgq36hai2mltr9hlfrqlu.apps.googleusercontent.com',
+        clientSecret: 'zL3Xcq6X9cAexkjdkThLEBl4',
+        refreshToken: '1/7mTzjXIy_U_ZgWOFUarFKIAPNN-jov2yoapmtgvise4'
     }
 });
 
