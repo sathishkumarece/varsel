@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.19",
+    "mongoose": "^5.7.5",
     "mongoose-auto-increment": "^5.0.1",
     "method-override": "^3.0.0",
     "dateformat": "3.0.3",
