@@ -1,6 +1,6 @@
 {
   "name": "varsel",
-  "version": "1.1.1",
+  "version": "2.0",
   "description": "To maintain credit and debit",
   "main": "server.js",
   "scripts": {
@@ -13,23 +13,24 @@
     "varsel"
   ],
   "dependencies": {
-    "express": "^4.16.2",
-    "mongoose": "^5.3.13",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.19",
     "mongoose-auto-increment": "^5.0.1",
-    "method-override": "^2.3.10",
+    "method-override": "^3.0.0",
     "dateformat": "3.0.3",
-    "express-session": "^1.15.6",
-    "passport": "^0.4.0",
+    "express-session": "^1.17.1",
+    "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "bcrypt": "^3.0.3",
-    "connect-mongo": "^2.0.2",
-    "nodemailer": "^6.1.1"
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "nodemailer": "^6.4.10",
+    "pdfkit": "^0.11.0"
   },
   "author": "Sathishkumar NATARAJ",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.26.4",
-    "nodemon": "^1.18.11",
+    "browser-sync": "^2.26.7",
+    "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5"
   }
 }
