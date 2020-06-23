@@ -168,10 +168,7 @@ function isRememberMe() {
     }
 }
 
-var port = 1516;
-if (process.env.APPLICATION_SERVICE_PORT) {
-    port = process.env.APPLICATION_SERVICE_PORT;
-}
+var port = process.env.APPLICATION_SERVICE_PORT | process.env.PORT | 1516;
 app.listen(port, () => {
     console.log('Server started!!!');
 
