@@ -2,15 +2,15 @@
 const nodeMailer = require('nodemailer');
 
 let transporter = nodeMailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    host: 'smtp-mail.outlook.com',
+    secureConnection: false, // TLS requires secureConnection to be false
+    port: 587, // port for secure SMTP
+    tls: {
+       ciphers:'SSLv3'
+    },
     auth: {
-        type: 'oauth2',
-        user: 'varsel.contact@gmail.com',
-        clientId: '818087180658-apnsia515t2jgq36hai2mltr9hlfrqlu.apps.googleusercontent.com',
-        clientSecret: 'zL3Xcq6X9cAexkjdkThLEBl4',
-        refreshToken: '1/7mTzjXIy_U_ZgWOFUarFKIAPNN-jov2yoapmtgvise4'
+        user: process.env.USER,
+        pass: process.env.PASS
     }
 });
 
