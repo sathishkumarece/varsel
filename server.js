@@ -27,7 +27,7 @@ mongoose.Promise = global.Promise;
 //provide a sensible default for local development
 // var mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
 var mongodb_connection_string = process.env.MONGO_CONN;
-console.log(process.env);
+// console.log(process.env);
 //take advantage of openshift env vars when available:
 //Create the options
 var options = {
