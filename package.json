@@ -1,11 +1,11 @@
 {
   "name": "varsel",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "To maintain credit and debit",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "nodemon": "nodemon --ignore public/ --inspect server.js",
+    "start": "env-cmd node server.js",
+    "nodemon": "env-cmd nodemon --ignore public/ --inspect server.js",
     "browsersync": "browser-sync start --proxy \"http://localhost:1516\" --files \"public/**/*\"",
     "dev": "npm-run-all -p nodemon browsersync"
   },
